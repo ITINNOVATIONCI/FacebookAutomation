@@ -1,69 +1,548 @@
 ﻿<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>@ViewData["Title"] - FacebookAutomation</title>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7"><![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8"><![endif]-->
+<!--[if IE 8]>html class="no-js lt-ie9"><![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+<!--<![endif]-->
+<!-- Mirrored from rivathemes.net/html/biss/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 28 Mar 2015 08:55:51 GMT -->
+<head>
+    <title>@ViewData["Title"] - FacebookAutomation</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
+    <meta name="description" content="Biss HTML5/CSS3 Template v1.0">
+    <meta name="author" content="Itinnovation">
+    <link rel="shortcut icon" href="favicon.ico">
 
-        <environment names="Development">
-            <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
-            <link rel="stylesheet" href="~/css/site.css" />
-        </environment>
-        <environment names="Staging,Production">
-            <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/css/bootstrap.min.css"
-                  asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-                  asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-            <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
-        </environment>
-        @Html.ApplicationInsightsJavaScript(TelemetryConfiguration)
-    </head>
-    <body>
-        <div class="navbar navbar-inverse navbar-fixed-top">
+    @RenderSection("scriptcss", required: false)
+
+   
+    @Html.ApplicationInsightsJavaScript(TelemetryConfiguration)
+</head>
+
+<body>
+
+    <div id="spinner-wrapper">
+
+        <div class="spinner">
+
+            <div class="ball"></div>
+
+            <p>LOADING</p>
+
+        </div>
+
+    </div>
+
+    <!-- Wrapping all content //-->
+
+    <div id="wrap-all">
+
+        <!-- Site header start //-->
+
+        <header class="site-header" id="site-header">
+
             <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a asp-controller="Home" asp-action="Index" class="navbar-brand">FacebookAutomation</a>
+
+                <div class="row">
+
+                    <div class="col-lg-12">
+
+                        <div class="width-100 float-left relative">
+
+                            <!-- Site logo start //-->
+
+                            <div class="site-logo scroll-hide">
+
+                                <a href="#">
+
+                                    <img src="~/biss/img/site-logo.png" alt="~/biss Logo">
+
+                                    <div class="width-auto float-left">
+
+                                        <p class="name">FPS</p>
+
+                                        <div class="cl"></div>
+
+                                        <p class="slogan">Corporate HTML Template</p>
+
+                                    </div>
+
+                                </a>
+
+                            </div>
+
+                            <!-- Site logo end //-->
+                            <!-- Contacts start //-->
+
+                            <div class="header-contacts scroll-hide hidden-xs">
+
+                                <p><i class="fa fa-phone"></i> 202-314-1583</p>
+
+                                <div class="cl"></div>
+
+                                <p><i class="fa fa-envelope"></i> support@biss.com</p>
+
+                            </div>
+
+                            <!-- Contacts end //-->
+
+                            <div class="width-auto float-right scroll-hide">
+
+                                <!-- Sub menu start //-->
+
+                                <p class="sub-menu hidden-xs">
+
+                                    @await Html.PartialAsync("_LoginPartial")
+
+                                </p>
+
+                                <!-- Sub menu end //-->
+
+                                <div class="cl"></div>
+
+                                <!-- Social icons start //-->
+
+                                <div class="sm-profiles">
+
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+
+                                    <a href="#"><i class="fa fa-behance"></i></a>
+
+                                    <a href="#"><i class="fa fa-linkedin"></i></a>
+
+                                    <a href="#"><i class="fa fa-google-plus"></i></a>
+
+                                    <a href="#"><i class="fa fa-rss"></i></a>
+
+                                </div>
+
+                                <!-- Social icons end //-->
+
+                                <div class="cl hidden-md hidden-lg hidden-sm"></div>
+
+                                <!-- Search form start //-->
+                                @*<form class="header-search">
+
+                                        <input type="search" placeholder="search..." name="s">
+
+                                        <button type="submit"><i class="fa fa-search"></i></button>
+
+                                    </form>*@
+
+                                <!-- Search form end //-->
+
+                            </div>
+
+                            <div class="cl"></div>
+
+                            <nav class="blocked">
+
+                                <!-- Mobile nav start //-->
+
+                                <div class="mobile-nav-wrapper hidden-lg hidden-md" id="mobile-menu-wrapper">
+
+                                    <i class="fa fa-bars mobile-nav-icon" id="mobile-nav-icon"></i>
+
+                                </div>
+
+                                <!-- Mobile nav end //-->
+                                <!-- Desktop nav start //-->
+
+                                <ul class="desktop-nav hidden-sm hidden-xs hide-on-tablet">
+
+                                    <li>
+                                        <a asp-controller="Home" asp-action="Index"><i class="fa fa-home"></i> home <small>biss home page</small></a>
+
+                                        <ul>
+
+                                            <li><a href="~/biss/boxed/index.html">Boxed Version</a></li>
+
+                                            <li><a href="~/biss/index.html">Homepage #1</a></li>
+
+                                            <li><a href="~/biss/index-2.html">Homepage #2</a></li>
+
+                                            <li><a href="~/biss/index-3.html">Homepage #3</a></li>
+
+                                            <li><a href="~/biss/index-4.html">Homepage #4</a></li>
+
+                                            <li><a href="~/biss/index-5.html">Homepage #5</a></li>
+
+                                            <li><a href="~/biss/index-6.html">Homepage #6</a></li>
+
+                                            <li><a href="~/biss/index-7.html">Homepage #7</a></li>
+
+                                        </ul>
+
+                                    </li>
+
+                                    <li id="mega-menu-1-hover"><a href="#"><i class="fa fa-bars"></i> mega <small>mega menu</small></a></li>
+
+                                    <li>
+
+                                        <a href="~/biss/pages.html"><i class="fa fa-file"></i> pages <small>what you can do</small></a>
+
+                                        <ul>
+
+                                            <li><a href="~/biss/pages-404.html">404</a></li>
+
+                                            <li><a href="~/biss/pages-about.html">about</a></li>
+
+                                            <li><a href="~/biss/pages-contacts.html">contacts</a></li>
+
+                                            <li><a href="~/biss/pages-faq.html">FAQ</a></li>
+
+                                            <li><a href="~/biss/pages-left-sidebar.html">left sidebar</a></li>
+
+                                            <li><a href="~/biss/pages-no-sidebars.html">no sidebar</a></li>
+
+                                            <li><a href="~/biss/pages-right-sidebar.html">right sidebar</a></li>
+
+                                            <li><a href="~/biss/pages-two-sidebars.html">two sidebars</a></li>
+
+                                            <li><a href="~/biss/pages-services.html">services</a></li>
+
+                                            <li><a href="~/biss/pages-typography.html">typography</a></li>
+
+                                        </ul>
+
+                                    </li>
+
+                                    <li>
+
+                                        <a href="#"><i class="fa fa-file-text-o"></i> projects <small>easy to customize</small></a>
+
+                                        <ul>
+
+                                            <li>
+                                                <a href="~/biss/portfolio.html">portfolio</a>
+
+                                                <ul>
+
+                                                    <li><a href="~/biss/portfolio-2-cols.html">2 cols</a></li>
+
+                                                    <li><a href="~/biss/portfolio-2-cols-sidebar.html">2 cols sidebar</a></li>
+
+                                                    <li><a href="~/biss/portfolio-3-cols.html">3 cols</a></li>
+
+                                                    <li><a href="~/biss/portfolio-3-cols-sidebar.html">3 cols sidebar</a></li>
+
+                                                    <li><a href="~/biss/portfolio-4-cols.html">4 cols</a></li>
+
+                                                    <li><a href="~/biss/portfolio-4-cols-sidebar.html">4 cols sidebar</a></li>
+
+                                                    <li><a href="~/biss/portfolio-single-project.html">single project</a></li>
+
+                                                </ul>
+
+                                            </li>
+
+                                            <li>
+
+                                                <a href="~/biss/shop.html">shop</a>
+
+                                                <ul>
+
+                                                    <li><a href="~/biss/shop-catalog.html">catalog</a></li>
+
+                                                    <li><a href="~/biss/shop-catalog-2.html">catalog #2</a></li>
+
+                                                    <li><a href="~/biss/shop-cart.html">cart</a></li>
+
+                                                    <li><a href="~/biss/shop-checkout.html">checkout</a></li>
+
+                                                    <li><a href="~/biss/shop-single-product.html">single product</a></li>
+
+                                                </ul>
+
+                                            </li>
+
+                                        </ul>
+
+                                    </li>
+
+                                    <li>
+
+                                        <a href="~/biss/blog.html"><i class="fa fa-pencil"></i> blog news <small>latest events</small></a>
+
+                                        <ul>
+
+                                            <li><a href="~/biss/blog-standard.html">standard</a></li>
+
+                                            <li><a href="~/biss/blog-alternative.html">alternative</a></li>
+
+                                            <li><a href="~/biss/blog-masonry.html">masonry</a></li>
+
+                                            <li><a href="~/biss/blog-timeline.html">timeline</a></li>
+
+                                            <li><a href="~/biss/blog-article.html">single article</a></li>
+
+                                        </ul>
+
+                                    </li>
+
+                                    <li><a asp-controller="Home" asp-action="Contact"><i class="fa fa-envelope"></i> contacts <small>stay in touch</small></a></li>
+
+                                </ul>
+
+                                <!-- Desktop nav end //-->
+                                <!-- Mega nemu #1 start //-->
+
+                                <div class="mega-menu-block" id="mega-menu-1">
+
+                                    <aside>
+
+                                        <h3>Global Tire</h3>
+
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed finibus pharetra ipsum, vitae porttitor ipsum feugiat sit amet. In eu interdum enim. In maximus mauris lorem, sit amet pharetra augue aliquam in. Pellentesque quis lobortis dolor, congue lacinia nulla. Nam ornare iaculis viverra. Cras sit amet scelerisque ex, vitae laoreet ante. Nullam vitae leo sed arcu luctus sollicitudin. Etiam molestie orci sed dignissim maximus. Curabitur sit amet augue vitae metus eleifend euismod. Sed at placerat velit.</p>
+
+                                    </aside>
+
+                                    <aside>
+
+                                        <h3>Weeknight Orange</h3>
+
+                                        <ul class="style-1">
+
+                                            <li><i class="fa fa-arrow-circle-right primary-color"></i> Suspendisse ultrices hendrerit elit et sodales.</li>
+
+                                            <li><i class="fa fa-arrow-circle-right primary-color"></i> Morbi nec enim eleifend, dictum purus in, dapibus justo. </li>
+
+                                            <li><i class="fa fa-arrow-circle-right primary-color"></i> Donec tincidunt, massa id vestibulum consequat.</li>
+
+                                            <li><i class="fa fa-arrow-circle-right primary-color"></i> Nam tellus ante, semper at porta vitae.</li>
+
+                                            <li><i class="fa fa-arrow-circle-right primary-color"></i> Curabitur aliquet sem neque, et consectetur lectus.</li>
+
+                                            <li><i class="fa fa-arrow-circle-right primary-color"></i>  Proin non mi in ex semper venenatis ac eget tortor.</li>
+
+                                        </ul>
+
+                                    </aside>
+
+                                    <aside>
+
+                                        <h3>Pointless Spider</h3>
+
+                                        <div class="flickr-1">
+
+                                            <script type="text/javascript" src="http://www.flickr.com/badge_code_v2.gne?count=6&amp;display=latest&amp;size=s&amp;layout=x&amp;source=user&amp;user=52617155@N08"></script>
+
+                                        </div>
+
+                                    </aside>
+
+                                </div>
+
+                                <!-- Mega nemu #1 end //-->
+
+                            </nav>
+
+                            <img src="~/biss/img/shadow.png" alt="" class="header-shadow">
+
+                        </div>
+
+                    </div>
+
                 </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li><a asp-controller="Home" asp-action="Index">Home</a></li>
-                        <li><a asp-controller="Home" asp-action="About">About</a></li>
-                        <li><a asp-controller="Home" asp-action="Contact">Contact</a></li>
-                    </ul>
-                    @await Html.PartialAsync("_LoginPartial")
-                </div>
+
             </div>
-        </div>
-        <div class="container body-content">
-            @RenderBody()
-            <hr />
-            <footer>
-                <p>&copy; 2016 - FacebookAutomation</p>
-            </footer>
+
+        </header>
+
+        <!-- Site header end //-->
+
+
+        @RenderBody()
+
+        <!-- Site footer start //-->
+
+        <footer class="site-footer">
+
+            <div class="container">
+
+                <div class="row">
+
+                    <!-- Widget "Company info" start //-->
+
+                    <div class="col-lg-4">
+
+                        <aside class="widget">
+
+                            <h2 class="widget-title">company info</h2>
+
+                            <div class="widget-content">
+
+                                <p> Sed ut odio a massa finibus scelerisque. Ut sed magna quis sapien aliquam sagittis sed vel leo. Proin tincidunt in turpis ut tincidunt. Quisque pulvinar, libero quis aliquam consectetur, augue elit malesuada mauris, et convallis tortor magna eget purus. </p>
+
+                                <p>Nulla hendrerit facilisis dolor, eu blandit lectus. Quisque ullamcorper fermentum ligula.</p>
+
+                                <!--
+
+                                    Newsletters subscription start
+
+                                    See "Newsletters" section in the help file.
+
+                                //-->
+
+                                <div class="quick_newsletter">
+
+                                    <form action="http://rivathemes.net/php/process.php">
+
+                                        <input name="name" id="name" value="" placeholder="your name..." class="text" onblur="_hint(this,'Name',1)" onclick="_hint(this,'Name',0)" type="text">
+
+                                        <input name="email" id="email" value="" placeholder="your email..." class="text" onblur="_hint(this,'email',1)" onclick="_hint(this,'email',0)" type="text">
+
+                                        <input name="submit" value="OK!" class="biss-btn biss-btn-primary" onclick="doSubscribe(this,'#subscribe_response_div');" type="button">
+
+                                    </form>
+
+                                </div>
+
+                                <span id="subscribe_response_div"></span>
+
+                                <!-- Newsletters subscription end //-->
+
+                            </div>
+
+                        </aside>
+
+                    </div>
+
+                    <!-- Widget "Company info" end //-->
+                    <!-- Widget "Useful links" start //-->
+
+                    <div class="col-lg-4">
+
+                        <aside class="widget widget-links">
+
+                            <h2 class="widget-title">useful links</h2>
+
+                            <div class="widget-content">
+
+                                <div class="wrap-1">
+
+                                    <ul>
+
+                                        <li><i class="fa fa-angle-double-right"></i> <a href="#">Neptune Endless</a></li>
+
+                                        <li><i class="fa fa-angle-double-right"></i> <a href="#">Helpless Weeknight</a></li>
+
+                                        <li><i class="fa fa-angle-double-right"></i> <a href="#">Green Helium</a></li>
+
+                                        <li><i class="fa fa-angle-double-right"></i> <a href="#">Hidden Tombstone</a></li>
+
+                                        <li><i class="fa fa-angle-double-right"></i> <a href="#">Persistent Xylophone</a></li>
+
+                                    </ul>
+
+                                </div>
+
+                                <div class="wrap-2">
+
+                                    <ul>
+
+                                        <li><i class="fa fa-angle-double-right"></i> <a href="#">Late Tombstone</a></li>
+
+                                        <li><i class="fa fa-angle-double-right"></i> <a href="#">Digital Monkey</a></li>
+
+                                        <li><i class="fa fa-angle-double-right"></i> <a href="#">Drill Gloomy</a></li>
+
+                                        <li><i class="fa fa-angle-double-right"></i> <a href="#">Gutsy Coffin</a></li>
+
+                                        <li><i class="fa fa-angle-double-right"></i> <a href="#">Pure Hook</a></li>
+
+                                    </ul>
+
+                                </div>
+
+                            </div>
+
+                        </aside>
+
+                    </div>
+
+                    <!-- Widget "Useful links" end //-->
+                    <!-- Widget "Stay connected" start //-->
+
+                    <div class="col-lg-4">
+
+                        <aside class="widget widget-contacts">
+
+                            <h2 class="widget-title">stay connected</h2>
+
+                            <div class="widget-content">
+
+                                <p>Maecenas ultrices finibus erat sit amet auctor. Curabitur et metus laoreet, fermentum quam sagittis, cursus augue. </p>
+
+                                <p class="contacts"><i class="fa fa-map-marker"></i> 1508 Kembery Drive, Chicago, IL 60605 </p>
+
+                                <p class="contacts"><i class="fa fa-phone"></i> 202-314-1583</p>
+
+                                <p class="contacts"><i class="fa fa-envelope"></i> support@biss.com</p>
+
+                                <div class="sm-profiles">
+
+                                    <a href="#"><i class="fa fa-facebook"></i></a>
+
+                                    <a href="#"><i class="fa fa-twitter"></i></a>
+
+                                    <a href="#"><i class="fa fa-behance"></i></a>
+
+                                    <a href="#"><i class="fa fa-linkedin"></i></a>
+
+                                    <a href="#"><i class="fa fa-google-plus"></i></a>
+
+                                    <a href="#"><i class="fa fa-rss"></i></a>
+
+                                </div>
+
+                            </div>
+
+                        </aside>
+
+                    </div>
+
+                    <!-- Widget "Stay connected" end //-->
+                    <!-- Copyrights start //-->
+
+                    <div class="col-lg-12">
+
+                        <div class="copyrights">
+
+                            <p>© 2014 Envato Pty Ltd. Trademarks and brands are the property of their respective owners.</p>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Copyrights end //-->
+
+                </div>
+
+            </div>
+
+        </footer>
+
+        <!-- Site footer end //-->
+        <!-- Scroll to the top button start //-->
+
+        <div id="scroll-to-the-top">
+
+            <i class="fa fa-angle-up"></i>
+
         </div>
 
-        <environment names="Development">
-            <script src="~/lib/jquery/dist/jquery.js"></script>
-            <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
-            <script src="~/js/site.js" asp-append-version="true"></script>
-        </environment>
-        <environment names="Staging,Production">
-            <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"
-                    asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
-                    asp-fallback-test="window.jQuery">
-            </script>
-            <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.5/bootstrap.min.js"
-                    asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                    asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
-            </script>
-            <script src="~/js/site.min.js" asp-append-version="true"></script>
-        </environment>
+        <!-- Scroll to the top button end //-->
+    </div>
 
-        @RenderSection("scripts", required: false)
-    </body>
+    @RenderSection("scripts", required: false)
+
+</body>
+
+<!-- Mirrored from rivathemes.net/html/biss/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Sat, 28 Mar 2015 08:58:34 GMT -->
 </html>

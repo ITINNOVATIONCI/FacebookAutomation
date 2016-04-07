@@ -1,0 +1,18 @@
+/*
+	Boxed
+*/
+#boxed-wrapper {
+  margin: 0 auto;
+  max-width: 1200px;
+  position: relative;
+}
+
+#boxed-wrapper .site-header {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+
+#boxed-wrapper .site-header.sticked {
+	position: fixed;
+}
