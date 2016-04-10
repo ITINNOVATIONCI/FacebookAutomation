@@ -97,21 +97,21 @@
                         ease: 'jswing'
                     });
 
-                    $('#company-events').rivaCarousel({
-                        style: 'horizontal',
-                        navigation: 'buttons',
-                        navigation_class: 'width-auto float-left nav-st-2',
-                        button_left_text: '<i class="fa fa-chevron-left"></i>',
-                        button_right_text: '<i class="fa fa-chevron-right"></i>',
-                        visible: 1,
-                        selector: 'item',
-                        gutter: 20,
-                        infinite: 0,
-                        interval: 2000,
-                        autostart: 0,
-                        speed: 600,
-                        ease: 'easeInQuad'
-                    });
+                    //$('#company-events').rivaCarousel({
+                    //    style: 'horizontal',
+                    //    navigation: 'buttons',
+                    //    navigation_class: 'width-auto float-left nav-st-2',
+                    //    button_left_text: '<i class="fa fa-chevron-left"></i>',
+                    //    button_right_text: '<i class="fa fa-chevron-right"></i>',
+                    //    visible: 1,
+                    //    selector: 'item',
+                    //    gutter: 20,
+                    //    infinite: 0,
+                    //    interval: 2000,
+                    //    autostart: 0,
+                    //    speed: 600,
+                    //    ease: 'easeInQuad'
+                    //});
 
                     $('#project-sorting').rivaSorting({
                         selector: 'project-item',
@@ -132,6 +132,7 @@
 
 }
 
+
 <!-- Layerslider start //-->
 
 <section class="padding-top-0 padding-bottom-0">
@@ -140,7 +141,7 @@
 
         <div class="ls-layer" style="transition3d: 3,9,18;">
 
-            <img class="ls-bg" src="biss/img/layerslider/1/bg.jpg" alt="layer1-background">
+            <img class="ls-bg" src="~/biss/img/layerslider/1/bg.jpg" alt="layer1-background">
 
             <div class="ls-s2 slide-description" style="top: 50px; left: 75px; slidedirection: fade; scalein: 2; transition2d: all; slidedelay: 6000; delayin: 1000; delayout: 1000; durationin: 1000; easingin: easeOutExpo;">
 
@@ -156,13 +157,13 @@
 
             </div>
 
-            <img class="ls-s1" src="biss/img/layerslider/1/img-1.png" alt="" style="top: 0px; left: 600px; transition2d: all; slidedelay: 6000; durationin: 1000; easingin: easeOutExpo;">
+            <img class="ls-s1" src="~/biss/img/layerslider/1/img-1.png" alt="" style="top: 0px; left: 600px; transition2d: all; slidedelay: 6000; durationin: 1000; easingin: easeOutExpo;">
 
         </div>
 
         <div class="ls-layer" style="transition3d: 1,5,15;">
 
-            <img class="ls-bg" src="biss/img/layerslider/1/bg.jpg" alt="layer1-background">
+            <img class="ls-bg" src="~/biss/img/layerslider/1/bg.jpg" alt="layer1-background">
 
             <div class="ls-s2 slide-description align-right" style="top: 50px; left: 350px; slidedirection: fade; scalein: 2; transition2d: all; slidedelay: 6000; durationin: 1000; delayin: 1000; delayout: 1000; easingin: easeOutExpo;">
 
@@ -178,7 +179,7 @@
 
             </div>
 
-            <img class="ls-s1" src="biss/img/layerslider/1/img-2.png" alt="" style="top: 0px; left: 30px; transition2d: all; slidedelay: 6000; durationin: 1000; easingin: easeOutExpo;">
+            <img class="ls-s1" src="~/biss/img/layerslider/1/img-2.png" alt="" style="top: 0px; left: 30px; transition2d: all; slidedelay: 6000; durationin: 1000; easingin: easeOutExpo;">
 
         </div>
 
@@ -209,11 +210,11 @@
 
                     <div class="width-33 float-right">
 
-                        <a href="#" class="biss-btn biss-btn-primary width-50 float-left sm-width-100 md-width-100">purchase now!</a>
+                        <a asp-controller="Home" asp-action="Pricing" class="biss-btn biss-btn-primary width-50 float-left sm-width-100 md-width-100">acheter maintenant!</a>
 
-                        <a href="#" class="biss-btn biss-btn-secondary width-50 float-right sm-width-100 md-width-100">learn more...</a>
+                        <a asp-controller="Home" asp-action="Pricing" class="biss-btn biss-btn-secondary width-50 float-right sm-width-100 md-width-100">Plus...</a>
 
-                    </div>
+</div>
 
                 </div>
 
@@ -369,7 +370,7 @@
 
             <div class="col-lg-5">
 
-                <img src="biss/img/mockup-1.png" alt="" class="float-left md-margin-top-50 sm-margin-top-50">
+                <img src="~/biss/img/mockup-1.png" alt="" class="float-left md-margin-top-50 sm-margin-top-50">
 
             </div>
 
@@ -380,208 +381,6 @@
 </section>
 
 <!-- Fields of expertise end //-->
-<!-- Latest projects start //-->
-
-<section class="align-center">
-
-    <div class="container">
-
-        <div class="row">
-
-            <div class="col-lg-12">
-
-                <p class="section-subtitle">our latest</p>
-
-                <h2 class="section-title">projects</h2>
-
-                <div class="plugin-container riva-sorting" id="project-sorting">
-
-                    <!-- Filter //-->
-
-                    <div class="filters">
-
-                        <span data-value="*" class="active">show all</span>
-
-                        <span data-value="web">web</span>
-
-                        <span data-value="development">development</span>
-
-                        <span data-value="html5">html5</span>
-
-                        <span data-value="css3">css3</span>
-
-                        <span data-value="design">design</span>
-
-                        <span data-value="photoshop">photoshop</span>
-
-                    </div>
-
-                    <div class="listing">
-
-                        <!-- Project item start //-->
-
-                        <article class="project-item web">
-
-                            <!-- Post image //-->
-
-                            <figure>
-
-                                <img src="biss/img/projects/1.jpg" alt="">
-
-                                <figcaption>
-
-                                    <a href="img/projects/1.jpg" class="zoom"><i class="fa fa-search"></i></a>
-
-                                    <a href="#" class="title">Empty Crystal</a>
-
-                                </figcaption>
-
-                            </figure>
-
-                            <!-- Project image //-->
-
-                        </article>
-
-                        <!-- Project item end //-->
-                        <!-- Project item start //-->
-
-                        <article class="project-item development">
-
-                            <!-- Post image //-->
-
-                            <figure>
-
-                                <img src="biss/img/projects/2.jpg" alt="">
-
-                                <figcaption>
-
-                                    <a href="biss/img/projects/2.jpg" class="zoom"><i class="fa fa-search"></i></a>
-
-                                    <a href="#" class="title">Morbid Tidy Sledgehammer</a>
-
-                                </figcaption>
-
-                            </figure>
-
-                            <!-- Project image //-->
-
-                        </article>
-
-                        <!-- Project item end //-->
-                        <!-- Project item start //-->
-
-                        <article class="project-item html5">
-
-                            <!-- Post image //-->
-
-                            <figure>
-
-                                <img src="biss/img/projects/3.jpg" alt="">
-
-                                <figcaption>
-
-                                    <a href="biss/img/projects/3.jpg" class="zoom"><i class="fa fa-search"></i></a>
-
-                                    <a href="#" class="title">Eternal Early Backpack</a>
-
-                                </figcaption>
-
-                            </figure>
-
-                            <!-- Project image //-->
-
-                        </article>
-
-                        <!-- Project item end //-->
-                        <!-- Project item start //-->
-
-                        <article class="project-item css3">
-
-                            <!-- Post image //-->
-
-                            <figure>
-
-                                <img src="biss/img/projects/4.jpg" alt="">
-
-                                <figcaption>
-
-                                    <a href="biss/img/projects/4.jpg" class="zoom"><i class="fa fa-search"></i></a>
-
-                                    <a href="#" class="title">Dangerous Pluto</a>
-
-                                </figcaption>
-
-                            </figure>
-
-                            <!-- Project image //-->
-
-                        </article>
-
-                        <!-- Project item end //-->
-                        <!-- Project item start //-->
-
-                        <article class="project-item design">
-
-                            <!-- Post image //-->
-
-                            <figure>
-
-                                <img src="biss/img/projects/5.jpg" alt="">
-
-                                <figcaption>
-
-                                    <a href="biss/img/projects/5.jpg" class="zoom"><i class="fa fa-search"></i></a>
-
-                                    <a href="#" class="title">Navy Tungsten</a>
-
-                                </figcaption>
-
-                            </figure>
-
-                            <!-- Project image //-->
-
-                        </article>
-
-                        <!-- Project item end //-->
-                        <!-- Project item start //-->
-
-                        <article class="project-item photoshop">
-
-                            <!-- Post image //-->
-
-                            <figure>
-
-                                <img src="biss/img/projects/6.jpg" alt="">
-
-                                <figcaption>
-
-                                    <a href="biss/img/projects/6.jpg" class="zoom"><i class="fa fa-search"></i></a>
-
-                                    <a href="#" class="title">Third Scoreboard</a>
-
-                                </figcaption>
-
-                            </figure>
-
-                            <!-- Project image //-->
-
-                        </article>
-
-                        <!-- Project item end //-->
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- Latest projects end //-->
 <!-- Stats start //-->
 
 <section class="align-center transparent-bg-secondary bg-img bg-img-2 padding-bottom-30">
@@ -683,17 +482,17 @@
 
                 <div class="logo-group sm-margin-bottom-70 md-margin-bottom-70" id="logo-group">
 
-                    <div class="logo-group-item"><span class="helper"></span><img src="biss/img/partners/1.png" alt=""></div>
+                    <div class="logo-group-item"><span class="helper"></span><img src="~/biss/img/partners/1.png" alt=""></div>
 
-                    <div class="logo-group-item"><span class="helper"></span><img src="biss/img/partners/2.png" alt=""></div>
+                    <div class="logo-group-item"><span class="helper"></span><img src="~/biss/img/partners/2.png" alt=""></div>
 
-                    <div class="logo-group-item"><span class="helper"></span><img src="biss/img/partners/3.png" alt=""></div>
+                    <div class="logo-group-item"><span class="helper"></span><img src="~/biss/img/partners/3.png" alt=""></div>
 
-                    <div class="logo-group-item"><span class="helper"></span><img src="biss/img/partners/4.png" alt=""></div>
+                    <div class="logo-group-item"><span class="helper"></span><img src="~/biss/img/partners/4.png" alt=""></div>
 
-                    <div class="logo-group-item"><span class="helper"></span><img src="biss/img/partners/5.png" alt=""></div>
+                    <div class="logo-group-item"><span class="helper"></span><img src="~/biss/img/partners/5.png" alt=""></div>
 
-                    <div class="logo-group-item"><span class="helper"></span><img src="biss/img/partners/6.png" alt=""></div>
+                    <div class="logo-group-item"><span class="helper"></span><img src="~/biss/img/partners/6.png" alt=""></div>
 
                 </div>
 
@@ -731,7 +530,7 @@
 
                             <figure>
 
-                                <img src="biss/img/faces/2.jpg" alt="">
+                                <img src="~/biss/img/faces/2.jpg" alt="">
 
                             </figure>
 
@@ -767,7 +566,7 @@
 
                             <figure>
 
-                                <img src="biss/img/faces/3.jpg" alt="">
+                                <img src="~/biss/img/faces/3.jpg" alt="">
 
                             </figure>
 
@@ -803,7 +602,7 @@
 
                             <figure>
 
-                                <img src="biss/img/faces/1.jpg" alt="">
+                                <img src="~/biss/img/faces/1.jpg" alt="">
 
                             </figure>
 
@@ -839,7 +638,7 @@
 
                             <figure>
 
-                                <img src="biss/img/faces/4.jpg" alt="">
+                                <img src="~/biss/img/faces/4.jpg" alt="">
 
                             </figure>
 
@@ -875,7 +674,7 @@
 
                             <figure>
 
-                                <img src="biss/img/faces/5.jpg" alt="">
+                                <img src="~/biss/img/faces/5.jpg" alt="">
 
                             </figure>
 
@@ -911,7 +710,7 @@
 
                             <figure>
 
-                                <img src="biss/img/faces/6.jpg" alt="">
+                                <img src="~/biss/img/faces/6.jpg" alt="">
 
                             </figure>
 
@@ -937,7 +736,7 @@
             <!-- "Client say" end //-->
             <!-- "Company events" start //-->
 
-            <div class="col-lg-12">
+            @*<div class="col-lg-12">
 
                 <div class="company-events margin-top-70" id="company-events">
 
@@ -998,7 +797,7 @@
 
                 </div>
 
-            </div>
+            </div>*@
 
             <!-- "Company events" end //-->
 
@@ -1024,8 +823,7 @@
 
                     <p class="main">purchase <span class="primary-color">biss html</span> on themeforest</p>
 
-                    <p><a href="#" class="biss-btn biss-btn-border-primary">purchase now!</a></p>
-
+                    <p><a asp-controller="Home" asp-action="Pricing" class="biss-btn biss-btn-border-primary">Acheter Maintenant!</a></p>
                 </div>
 
             </div>

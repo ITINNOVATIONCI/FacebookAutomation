@@ -20,9 +20,38 @@ namespace FacebookAutomation.Controllers
             return View();
         }
 
+        public IActionResult Faq()
+        {
+
+            return View();
+        }
+
+        public IActionResult Feature()
+        {
+
+            return View();
+        }
+
+        public IActionResult Galerie()
+        {
+
+            return View();
+        }
+
+        public IActionResult Pricing()
+        {
+
+            return View();
+        }
+
+        public IActionResult Shopcart()
+        {
+
+            return View();
+        }
+
         public IActionResult Contact()
         {
-            ViewData["Message"] = "Your contact page.";
 
             return View();
         }
