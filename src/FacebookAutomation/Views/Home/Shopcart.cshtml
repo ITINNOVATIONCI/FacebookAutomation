@@ -117,49 +117,39 @@
 
                     <aside class="widget">
 
-                        <h2 class="widget-title">shipping method</h2>
+                        <h2 class="widget-title">Information Client</h2>
 
                         <div class="widget-content">
 
                             <div class="form-elem form-elem-short">
 
-                                <label for="cart-shipping-country">Country:</label>
+                                <label for="cart-info-nom">Nom * :</label>
 
-                                <select id="cart-shipping-country" name="cart-shipping-country">
-
-                                    <option>United Kingdom</option>
-
-                                    <option>France</option>
-
-                                    <option>Germany</option>
-
-                                    <option>Spain</option>
-
-                                </select>
+                                <input type="text" name="cart-info-nom" id="cart-info-nom" required>
 
                             </div>
 
                             <div class="form-elem form-elem-short">
 
-                                <label for="cart-shipping-state">State / County:</label>
+                                <label for="cart-info-email">Email * :</label>
 
-                                <input type="text" name="cart-shipping-state" id="cart-shipping-state">
-
-                            </div>
-
-                            <div class="form-elem form-elem-short">
-
-                                <label for="cart-shipping-postcode">Post code / ZIP:</label>
-
-                                <input type="text" name="cart-shipping-postcode" id="cart-shipping-postcode">
+                                <input type="text" name="cart-info-email" id="cart-info-email" required>
 
                             </div>
 
                             <div class="form-elem form-elem-short">
+
+                                <label for="cart-info-numero">Numéro * :</label>
+
+                                <input type="text" name="cart-info-numero" id="cart-info-numero" required>
+
+                            </div>
+
+                            @*<div class="form-elem form-elem-short">
 
                                 <button class="biss-btn biss-btn-secondary"><i class="fa fa-check"></i> Apply</button>
 
-                            </div>
+                            </div>*@
 
                         </div>
 
@@ -202,7 +192,7 @@
 
                     <div class="cart-in-cart">
 
-                        <span>5 items</span> are in your shopping cart now.
+                        <span>1 items</span> are in your shopping cart now.
 
                     </div>
 
@@ -234,9 +224,9 @@
 
                                 <td class="w1">1</td>
 
-                                <td class="w2 title"><a href="#"><i class="fa fa-times remove"></i></a> <a href="#">Navy Sun</a></td>
+                                <td class="w2 title"><a href="#"><i class="fa fa-times remove"></i></a> <a href="#">Licence 1 utilisateur</a></td>
 
-                                <td class="w3 price"><span id="cart-table-price-1" data-val="89">$89</span></td>
+                                <td class="w3 price"><span id="cart-table-price-1" data-val="55000">55000</span></td>
 
                                 <td class="w3 qty">
 
@@ -254,147 +244,11 @@
 
                                 <td class="w3 total">
 
-                                    <span id="cart-table-display-total-1">$89</span>
+                                    <span id="cart-table-display-total-1">55000</span>
 
                                     <!-- Total price of the product is here //-->
 
-                                    <input type="hidden" name="cart-table-total-1" id="cart-table-total-1" value="89">
-
-                                </td>
-
-                            </tr>
-
-                            <tr>
-
-                                <td class="w1">2</td>
-
-                                <td class="w2 title"><a href="#"><i class="fa fa-times remove"></i></a> <a href="#">Massive Subdivision</a></td>
-
-                                <td class="w3 price"><span id="cart-table-price-2" data-val="78">$78</span></td>
-
-                                <td class="w3 qty">
-
-                                    <i class="fa fa-plus cart-table-change-qty" data-position="2"></i>
-
-                                    <span id="cart-table-display-qty-2" data-qty="1">1</span>
-
-                                    <i class="fa fa-minus cart-table-change-qty" data-position="2"></i>
-
-                                    <!-- Qty of the product is here //-->
-
-                                    <input type="hidden" name="cart-table-qty-2" id="cart-table-qty-2" value="1">
-
-                                </td>
-
-                                <td class="w3 total">
-
-                                    <span id="cart-table-display-total-2">$78</span>
-
-                                    <!-- Total price of the product is here //-->
-
-                                    <input type="hidden" name="cart-table-total-2" id="cart-table-total-2" value="78">
-
-                                </td>
-
-                            </tr>
-
-                            <tr>
-
-                                <td class="w1">3</td>
-
-                                <td class="w2 title"><a href="#"><i class="fa fa-times remove"></i></a> <a href="#">Third Shower</a></td>
-
-                                <td class="w3 price"><span id="cart-table-price-3" data-val="37">$37</span></td>
-
-                                <td class="w3 qty">
-
-                                    <i class="fa fa-plus cart-table-change-qty" data-position="3"></i>
-
-                                    <span id="cart-table-display-qty-3" data-qty="1">1</span>
-
-                                    <i class="fa fa-minus cart-table-change-qty" data-position="3"></i>
-
-                                    <!-- Qty of the product is here //-->
-
-                                    <input type="hidden" name="cart-table-qty-3" id="cart-table-qty-3" value="1">
-
-                                </td>
-
-                                <td class="w3 total">
-
-                                    <span id="cart-table-display-total-3">$37</span>
-
-                                    <!-- Total price of the product is here //-->
-
-                                    <input type="hidden" name="cart-table-total-3" id="cart-table-total-3" value="37">
-
-                                </td>
-
-                            </tr>
-
-                            <tr>
-
-                                <td class="w1">4</td>
-
-                                <td class="w2 title"><a href="#"><i class="fa fa-times remove"></i></a> <a href="#">Temple Moving</a></td>
-
-                                <td class="w3 price"><span id="cart-table-price-4" data-val="78">$78</span></td>
-
-                                <td class="w3 qty">
-
-                                    <i class="fa fa-plus cart-table-change-qty" data-position="4"></i>
-
-                                    <span id="cart-table-display-qty-4" data-qty="1">1</span>
-
-                                    <i class="fa fa-minus cart-table-change-qty" data-position="4"></i>
-
-                                    <!-- Qty of the product is here //-->
-
-                                    <input type="hidden" name="cart-table-qty-4" id="cart-table-qty-4" value="1">
-
-                                </td>
-
-                                <td class="w3 total">
-
-                                    <span id="cart-table-display-total-4">$78</span>
-
-                                    <!-- Total price of the product is here //-->
-
-                                    <input type="hidden" name="cart-table-total-4" id="cart-table-total-4" value="78">
-
-                                </td>
-
-                            </tr>
-
-                            <tr>
-
-                                <td class="w1">5</td>
-
-                                <td class="w2 title"><a href="#"><i class="fa fa-times remove"></i></a> <a href="#">Boiling Scarecrow</a></td>
-
-                                <td class="w3 price"><span id="cart-table-price-5" data-val="37">$37</span></td>
-
-                                <td class="w3 qty">
-
-                                    <i class="fa fa-plus cart-table-change-qty" data-position="5"></i>
-
-                                    <span id="cart-table-display-qty-5" data-qty="1">1</span>
-
-                                    <i class="fa fa-minus cart-table-change-qty" data-position="5"></i>
-
-                                    <!-- Qty of the product is here //-->
-
-                                    <input type="hidden" name="cart-table-qty-5" id="cart-table-qty-5" value="1">
-
-                                </td>
-
-                                <td class="w3 total">
-
-                                    <span id="cart-table-display-total-5">$37</span>
-
-                                    <!-- Total price of the product is here //-->
-
-                                    <input type="hidden" name="cart-table-total-5" id="cart-table-total-5" value="37">
+                                    <input type="hidden" name="cart-table-total-1" id="cart-table-total-1" value="55000">
 
                                 </td>
 
@@ -409,25 +263,25 @@
 
                     <aside class="widget">
 
-                        <h2 class="widget-title">order totals</h2>
+                        <h2 class="widget-title">Commande totals</h2>
 
                         <div class="widget-content">
 
                             <ul class="cart-totals">
 
-                                <li><span class="sp1">Cart subtotals:</span> <span class="sp2">$1000.00</span></li>
+                                @*<li><span class="sp1">Cart subtotals:</span> <span class="sp2">$1000.00</span></li>
 
-                                <li><span class="sp1">Shipping:</span> <span class="sp2">FREE</span></li>
+                                <li><span class="sp1">Shipping:</span> <span class="sp2">FREE</span></li>*@
 
-                                <li class="t"><span class="sp1">Order total:</span> <span class="sp2">$1000.00</span></li>
+                                <li class="t"><span class="sp1">Total:</span> <span class="sp2">$1000.00</span></li>
 
                             </ul>
 
                             <p>
 
-                                <button class="biss-btn biss-btn-secondary margin-right-10" id="cart-update-cart"><i class="fa fa-refresh"></i> update cart</button>
+                                <button class="biss-btn biss-btn-secondary margin-right-10" id="cart-update-cart"><i class="fa fa-refresh"></i> Annuler</button>
 
-                                <button class="biss-btn biss-btn-primary" id="cart-checkout">go to checkout <i class="fa fa-arrow-right"></i></button>
+                                <button class="biss-btn biss-btn-primary" id="cart-checkout">Valider Paiement <i class="fa fa-arrow-right"></i></button>
 
                             </p>
 
