@@ -44,7 +44,7 @@ namespace FacebookAutomation.Controllers
             return View();
         }
 
-        public IActionResult Shopcart()
+        public IActionResult Shopcart(string id)
         {
 
             return View();
