@@ -9,6 +9,9 @@ namespace FacebookAutomation.Models
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        public DbSet<Produits> Produits { get; set; }
+        public DbSet<Transactions> Transactions { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

@@ -8,9 +8,10 @@ using FacebookAutomation.Models;
 namespace FacebookAutomation.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20160413111156_first")]
+    partial class first
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")
@@ -93,21 +94,15 @@ namespace FacebookAutomation.Migrations
 
                     b.Property<double>("Montant");
 
-                    b.Property<string>("Nom");
-
                     b.Property<string>("Numero");
 
-                    b.Property<string>("NumeroClient");
-
-                    b.Property<double>("Quantite");
+                    b.Property<double>("Pourcentage");
 
                     b.Property<double>("Total");
 
                     b.Property<string>("TypeTransaction");
 
                     b.Property<string>("buyer_name");
-
-                    b.Property<string>("email");
 
                     b.Property<string>("idProduit");
 

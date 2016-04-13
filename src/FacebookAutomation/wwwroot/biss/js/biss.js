@@ -600,7 +600,7 @@
 
 				$tableTotal.val( newQty * price );
 
-				$displayTotal.html('$' + newQty * price );
+				$displayTotal.html(newQty * price );
 
 			} else {
 
@@ -614,7 +614,7 @@
 
 					$tableTotal.val( newQty * price );
 
-					$displayTotal.html('$' + newQty * price );
+					$displayTotal.html(newQty * price );
 
 				}
 			}
