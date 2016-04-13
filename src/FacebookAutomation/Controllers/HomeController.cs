@@ -5,6 +5,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
 using FacebookAutomation.Models;
 using Microsoft.ApplicationInsights;
+using System.Text;
+using Newtonsoft.Json;
+using System.Collections.Specialized;
+using System.Net;
+using Microsoft.AspNet.Authorization;
 
 namespace FacebookAutomation.Controllers
 {
@@ -73,11 +78,158 @@ namespace FacebookAutomation.Controllers
             return View(trans);
         }
 
-        public IActionResult Paiement(Transactions trans)
+        [HttpPost]
+        [AllowAnonymous]
+        public IActionResult Notification(NotifParametre notif)
+        {
+            //HelperSMS.SendSMS(Config.adminNumber, "Notif");
+            ViewBag.Message = "Notification";
+            telemetry.TrackEvent("Notification");
+
+            using (WebClient client = new WebClient())
+            {
+                NameValueCollection data = new NameValueCollection();
+                data.Add("apikey", Config.apikey);
+                data.Add("cpm_site_id", notif.cpm_site_id);
+                data.Add("cpm_trans_id", notif.cpm_trans_id);
+
+                byte[] responsebytes = client.UploadValues(Config.URIStatus, "POST", data);
+                string res = Encoding.UTF8.GetString(responsebytes);
+                JsonResponse ci = JsonConvert.DeserializeObject<JsonResponse>(res);
+
+                //debut test si ok cpm_result==00
+
+                if (ci.transaction.cpm_result == "00")
+                {
+                    try
+                    {
+                        Transactions trans = _dbContext.Transactions.Where(c => c.Id == ci.transaction.cpm_trans_id && c.Etat == "ACTIF" && c.status != "Terminer").FirstOrDefault();
+
+                        if (trans != null)
+                        {
+                            if (trans.TypeTransaction == "COMMAND")
+                            {
+                                try
+                                {
+                                    telemetry.TrackEvent("Notification:COMMAND");
+                                    trans.status = "Terminer";
+                                    trans.statuscinetpay = ci.transaction.cpm_error_message;
+                                    trans.buyer_name = ci.transaction.buyer_name;
+
+                                    _dbContext.SaveChanges();
+
+                                }
+                                catch (Exception ex)
+                                {
+                                    trans.log = ex.Message;
+                                    _dbContext.SaveChanges();
+
+                                }
+
+                            }
+                        }
+                        else
+                        {
+                            HelperSMS.SendSMS(Config.adminNumber, "Trans null");
+
+                        }
+                    }
+                    catch (Exception)
+                    {
+
+                        HelperSMS.SendSMS(Config.adminNumber, "Trans null");
+                    }
+
+                }
+                else
+                {
+                    //log
+                }
+
+                //HelperSMS.SendSMS(Config.adminNumber, ci.transaction.buyer_name + " " + ci.transaction.cel_phone_num + " " + ci.transaction.cpm_custom + " " + ci.transaction.cpm_error_message + " " + ci.transaction.cpm_payid + " " + ci.transaction.cpm_result + " " + ci.transaction.cpm_trans_status);
+
+                ViewBag.Notif = res;
+            }
+
+
+            return null;
+        }
+
+        public ActionResult Paiement(Transactions trans)
         {
 
-            return View();
+            trans.produit = _dbContext.Produits.Where(c => c.Id == trans.idProduit).FirstOrDefault();
+            trans.Id = Guid.NewGuid().ToString();
+            trans.Date = DateTime.UtcNow.Date;
+            trans.DateTransaction = DateTime.UtcNow;
+            trans.TypeTransaction = "COMMANDE";
+            //trans.TypeTransfert = "RAPIDE";
+            trans.Etat = "ACTIF";
+
+            //trans.Pourcentage = 0;
+            //trans.Total = trans.Montant;
+            trans.status = "En Attente du Paiement";
+            _dbContext.Transactions.Add(trans);
+            _dbContext.SaveChanges();
+
+            return View(PaiementRapide(trans, "Achat de " + trans.produit.Description));
+
         }
+
+        public PaiementData PaiementRapide(Transactions trans, string Description)
+        {
+            string signature;
+            string id = DateTime.UtcNow.ToString("yyyyMMddhhmmss");
+
+            using (WebClient client = new WebClient())
+            {
+
+                Config.cpm_designation = Description;
+
+                NameValueCollection data = new NameValueCollection();
+                data.Add("apikey", "106612574455953b2d0e7775.94466351");
+                data.Add("cpm_site_id", "883420");
+                data.Add("cpm_currency", "CFA");
+                data.Add("cpm_page_action", "PAYMENT");
+                data.Add("cpm_payment_config", "SINGLE");
+                data.Add("cpm_version", "V1");
+                data.Add("cpm_language", "fr");
+                data.Add("cpm_trans_date", id);
+                data.Add("cpm_trans_id", trans.Id.ToString());
+                data.Add("cpm_designation", Config.cpm_designation);
+                data.Add("cpm_amount", trans.Total.ToString());
+                data.Add("cpm_custom", HttpContext.User.Identity.Name);
+
+                byte[] responsebytes = client.UploadValues(URISignature, "POST", data);
+                signature = Encoding.UTF8.GetString(responsebytes);
+                signature = JsonConvert.DeserializeObject<string>(signature);
+
+            }
+
+            Dictionary<string, object> postData = new Dictionary<string, object>();
+            postData.Add("apikey", Config.apikey);
+            postData.Add("cpm_site_id", Config.cpm_site_id);
+            postData.Add("cpm_currency", Config.cpm_currency);
+            postData.Add("cpm_page_action", Config.cpm_page_action);
+            postData.Add("cpm_payment_config", Config.cpm_payment_config);
+            postData.Add("cpm_version", Config.cpm_version);
+            postData.Add("cpm_language", Config.cpm_language);
+            postData.Add("cpm_trans_date", id);
+            postData.Add("cpm_trans_id", trans.Id.ToString());
+            postData.Add("cpm_designation", Config.cpm_designation);
+            postData.Add("cpm_amount", trans.Total.ToString());
+            postData.Add("cpm_custom", HttpContext.User.Identity.Name);
+            postData.Add("signature", signature);
+
+            postData.Add("return_url", "http://facebookautomation.azurewebsites.net");
+            postData.Add("notify_url", "http://facebookautomation.azurewebsites.net/Home/Notification");
+
+            PaiementData pay = new PaiementData();
+            pay.data = postData;
+
+            return pay;
+        }
+
 
         public IActionResult Contact()
         {

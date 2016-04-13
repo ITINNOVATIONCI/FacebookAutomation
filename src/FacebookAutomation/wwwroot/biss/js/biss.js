@@ -586,6 +586,8 @@
 				$displayTotal = $('#cart-table-display-total-' + position),
 				$tableQty = $('#cart-table-qty-' + position),
 				$tableTotal = $('#cart-table-total-' + position),
+                $orderTotal = $('#order-total'),
+                $orderDisplayTotal = $('#order-display-total'),
 				oldQty = parseInt($displayQty.attr('data-qty'), 10),
 				price = parseInt($('#cart-table-price-' + position).attr('data-val'), 10),
 				oldTotal = 0;
@@ -600,7 +602,11 @@
 
 				$tableTotal.val( newQty * price );
 
-				$displayTotal.html(newQty * price );
+				$displayTotal.html(newQty * price);
+
+				$orderTotal.val(newQty * price);
+
+				$orderDisplayTotal.html(newQty * price);
 
 			} else {
 
@@ -614,7 +620,11 @@
 
 					$tableTotal.val( newQty * price );
 
-					$displayTotal.html(newQty * price );
+					$displayTotal.html(newQty * price);
+
+					$orderTotal.val(newQty * price);
+
+					$orderDisplayTotal.html(newQty * price);
 
 				}
 			}

@@ -51,29 +51,29 @@
     <script src="~/biss/js/biss.js"></script>
 
     <script>
-(function($) {
-	"use strict";
+        (function ($) {
+            "use strict";
 
-	//
-	// Preload images
-	//
+            //
+            // Preload images
+            //
 
-	$('document').ready(function() {
+            $('document').ready(function () {
 
-		var $container = $('body'),
-			tweetsTimer;
+                var $container = $('body'),
+                    tweetsTimer;
 
-		$container.imagesLoaded( function() {
+                $container.imagesLoaded(function () {
 
-			$('#spinner-wrapper').hide();
+                    $('#spinner-wrapper').hide();
 
-		});
+                });
 
-		clearTimeout(tweetsTimer);
+                clearTimeout(tweetsTimer);
 
-	});
+            });
 
-})(jQuery);
+        })(jQuery);
     </script>
 
 }
@@ -126,7 +126,7 @@
 
                                     <label for="cart-info-nom">Nom * :</label>
 
-                                    <input asp-for="Nom" type="text" name="cart-info-nom" id="cart-info-nom" required>
+                                    <input asp-for="Nom" type="text" required>
 
                                 </div>
 
@@ -134,7 +134,7 @@
 
                                     <label for="cart-info-email">Email * :</label>
 
-                                    <input asp-for="email" type="text" name="cart-info-email" id="cart-info-email" required>
+                                    <input asp-for="email" type="text" required>
 
                                 </div>
 
@@ -142,7 +142,7 @@
 
                                     <label for="cart-info-numero">Numéro * :</label>
 
-                                    <input asp-for="NumeroClient" type="text" name="cart-info-numero" id="cart-info-numero" required>
+                                    <input asp-for="NumeroClient" type="text" required>
 
                                 </div>
 
@@ -158,30 +158,29 @@
 
                         <!-- Shipping end //-->
                         <!-- Promo start //-->
-
                         @*<aside class="widget">
 
-                            <h2 class="widget-title">promocode</h2>
+                                <h2 class="widget-title">promocode</h2>
 
-                            <div class="widget-content">
+                                <div class="widget-content">
 
-                                <div class="form-elem form-elem-short">
+                                    <div class="form-elem form-elem-short">
 
-                                    <label for="cart-shipping-promocode">Promocode:</label>
+                                        <label for="cart-shipping-promocode">Promocode:</label>
 
-                                    <input type="text" name="cart-shipping-promocode" id="cart-shipping-promocode">
+                                        <input type="text" name="cart-shipping-promocode" id="cart-shipping-promocode">
+
+                                    </div>
+
+                                    <div class="form-elem form-elem-short">
+
+                                        <button class="biss-btn biss-btn-secondary"><i class="fa fa-check"></i> Apply</button>
+
+                                    </div>
 
                                 </div>
 
-                                <div class="form-elem form-elem-short">
-
-                                    <button class="biss-btn biss-btn-secondary"><i class="fa fa-check"></i> Apply</button>
-
-                                </div>
-
-                            </div>
-
-                        </aside>*@
+                            </aside>*@
 
                         <!-- Promo end //-->
 
@@ -225,6 +224,7 @@
 
                                     <td class="w1">1</td>
 
+                                    
                                     <td class="w2 title"><a href="#"><i class="fa fa-times remove"></i></a> <a href="#">@Model.produit.Description</a></td>
 
                                     <td class="w3 price"><span id="cart-table-price-1" data-val="@Model.produit.PrixVente">@Model.produit.PrixVente</span></td>
@@ -238,8 +238,8 @@
                                         <i class="fa fa-minus cart-table-change-qty" data-position="1"></i>
 
                                         <!-- Qty of the product is here //-->
-
-                                        <input asp-for="Quantite" type="hidden" name="cart-table-qty-1" id="cart-table-qty-1" value="1">
+                                        <input asp-for="idProduit" type="hidden" value="@Model.produit.Id">
+                                        <input asp-for="Quantite" type="hidden" id="cart-table-qty-1" value="1">
 
                                     </td>
 
@@ -249,7 +249,7 @@
 
                                         <!-- Total price of the product is here //-->
 
-                                        <input asp-for="Montant" type="hidden" name="cart-table-total-1" id="cart-table-total-1" value="@Model.produit.PrixVente">
+                                        <input asp-for="Montant" type="hidden" id="cart-table-total-1" value="@Model.produit.PrixVente">
 
                                     </td>
 
@@ -274,7 +274,8 @@
 
                                         <li><span class="sp1">Shipping:</span> <span class="sp2">FREE</span></li>*@
 
-                                    <li class="t"><span class="sp1">Total:</span> <input asp-for="Total" class="sp2" value="@Model.produit.PrixVente" /></li>
+                                    <li class="t"><span class="sp1">Total:</span> <span class="sp2" name="order-display-total" id="order-display-total">@Model.produit.PrixVente</span></li>
+                                    <li><input type="hidden" asp-for="Total" class="sp2" id="order-total" value="@Model.produit.PrixVente" /></li>
 
                                 </ul>
 
