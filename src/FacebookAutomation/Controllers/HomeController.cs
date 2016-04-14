@@ -10,6 +10,10 @@ using Newtonsoft.Json;
 using System.Collections.Specialized;
 using System.Net;
 using Microsoft.AspNet.Authorization;
+using FacebookAutomation.ViewModels.Account;
+using Microsoft.AspNet.Identity;
+using FacebookAutomation.Services;
+using System.Security.Cryptography;
 
 namespace FacebookAutomation.Controllers
 {
@@ -19,6 +23,9 @@ namespace FacebookAutomation.Controllers
         protected string URISignature = "http://api.sandbox.cinetpay.com/v1/?method=getSignatureByPost";
         protected string URIStatus = "http://api.sandbox.cinetpay.com/v1/?method=checkPayStatus";
 
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly IEmailSender _emailSender;
         private ApplicationDbContext _dbContext;
         public string currentUserId { get; set; }
         public ApplicationUser currentUser { get; set; }
@@ -26,9 +33,11 @@ namespace FacebookAutomation.Controllers
         string signature;
         public string message { get; set; }
 
-        public HomeController(ApplicationDbContext dbContext, TelemetryClient Telemetry)
+        public HomeController(ApplicationDbContext dbContext, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IEmailSender emailSender, TelemetryClient Telemetry)
         {
             _dbContext = dbContext;
+            _userManager = userManager;
+            _signInManager = signInManager;
             telemetry = Telemetry;
 
         }
@@ -107,7 +116,7 @@ namespace FacebookAutomation.Controllers
 
                         if (trans != null)
                         {
-                            if (trans.TypeTransaction == "COMMAND")
+                            if (trans.TypeTransaction == "COMMANDE")
                             {
                                 try
                                 {
@@ -117,6 +126,14 @@ namespace FacebookAutomation.Controllers
                                     trans.buyer_name = ci.transaction.buyer_name;
 
                                     _dbContext.SaveChanges();
+
+                                    RegisterViewModel model = new RegisterViewModel();
+                                    model.Email = trans.email;
+                                    string pass = GetUniqueKey(6);
+                                    model.Password = pass;
+                                    model.ConfirmPassword = pass;
+
+                                    Register(model);
 
                                 }
                                 catch (Exception ex)
@@ -137,7 +154,7 @@ namespace FacebookAutomation.Controllers
                     catch (Exception)
                     {
 
-                        HelperSMS.SendSMS(Config.adminNumber, "Trans null");
+                        HelperSMS.SendSMS(Config.adminNumber, "Try Trans null");
                     }
 
                 }
@@ -152,7 +169,26 @@ namespace FacebookAutomation.Controllers
             }
 
 
-            return null;
+            return Ok();
+        }
+
+        public async void Register(RegisterViewModel model)
+        {
+
+            var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+            var result = await _userManager.CreateAsync(user, model.Password);
+            if (result.Succeeded)
+            {
+                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
+                // Send an email with this link
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+                await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
+                    "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
+                await _emailSender.SendWelcomeEmail(user.Email, user.Email);
+
+            }
+
         }
 
         public ActionResult Paiement(Transactions trans)
@@ -188,7 +224,7 @@ namespace FacebookAutomation.Controllers
 
                 NameValueCollection data = new NameValueCollection();
                 data.Add("apikey", "106612574455953b2d0e7775.94466351");
-                data.Add("cpm_site_id", "883420");
+                data.Add("cpm_site_id", Config.cpm_site_id);
                 data.Add("cpm_currency", "CFA");
                 data.Add("cpm_page_action", "PAYMENT");
                 data.Add("cpm_payment_config", "SINGLE");
@@ -241,5 +277,26 @@ namespace FacebookAutomation.Controllers
         {
             return View();
         }
+
+        public string GetUniqueKey(int maxSize)
+        {
+            char[] chars = new char[62];
+            chars =
+            "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".ToCharArray();
+            byte[] data = new byte[1];
+            using (RNGCryptoServiceProvider crypto = new RNGCryptoServiceProvider())
+            {
+                crypto.GetNonZeroBytes(data);
+                data = new byte[maxSize];
+                crypto.GetNonZeroBytes(data);
+            }
+            StringBuilder result = new StringBuilder(maxSize);
+            foreach (byte b in data)
+            {
+                result.Append(chars[b % (chars.Length)]);
+            }
+            return result.ToString();
+        }
+
     }
 }
