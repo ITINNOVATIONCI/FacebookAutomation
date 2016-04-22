@@ -17,5 +17,7 @@ namespace FacebookAutomation.ViewModels.Manage
         public bool TwoFactor { get; set; }
 
         public bool BrowserRemembered { get; set; }
+
+        public int NbreLicence { get; set; }
     }
 }

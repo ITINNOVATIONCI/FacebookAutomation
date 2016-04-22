@@ -21,14 +21,17 @@ namespace FacebookAutomation.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ISmsSender _smsSender;
         private readonly ILogger _logger;
+        private ApplicationDbContext _dbContext;
 
         public ManageController(
         UserManager<ApplicationUser> userManager,
         SignInManager<ApplicationUser> signInManager,
+        ApplicationDbContext dbContext,
         IEmailSender emailSender,
         ISmsSender smsSender,
         ILoggerFactory loggerFactory)
         {
+            _dbContext = dbContext;
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
@@ -57,8 +60,10 @@ namespace FacebookAutomation.Controllers
                 PhoneNumber = await _userManager.GetPhoneNumberAsync(user),
                 TwoFactor = await _userManager.GetTwoFactorEnabledAsync(user),
                 Logins = await _userManager.GetLoginsAsync(user),
-                BrowserRemembered = await _signInManager.IsTwoFactorClientRememberedAsync(user)
-            };
+                BrowserRemembered = await _signInManager.IsTwoFactorClientRememberedAsync(user),
+                NbreLicence = user.NbreTotalLicence - user.NbreValideLicence
+        };
+
             return View(model);
         }
 
@@ -294,6 +299,40 @@ namespace FacebookAutomation.Controllers
             var redirectUrl = Url.Action("LinkLoginCallback", "Manage");
             var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl, User.GetUserId());
             return new ChallengeResult(provider, properties);
+        }
+
+        //
+        // GET: /Manage/ChangePassword
+        [HttpGet]
+        public async Task<IActionResult> ValiderLicence()
+        {
+            var user = await GetCurrentUserAsync();
+            //ViewBag.NbreLicence = user.NbreTotalLicence - user.NbreValideLicence;
+            return View();
+        }
+
+        //
+        // POST: /Manage/ValiderLicence
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ValiderLicence(Licences model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+            var user = await GetCurrentUserAsync();
+            if (user != null)
+            {
+                model.Id = Guid.NewGuid().ToString();
+                model.Etat = "ACTIF";
+                model.idUtilisateur = user.Id;
+                user.NbreValideLicence++;
+                _dbContext.Licences.Add(model);
+                _dbContext.SaveChanges();
+                return View(model);
+            }
+            return RedirectToAction(nameof(Index), new { Message = ManageMessageId.Error });
         }
 
         //
