@@ -87,7 +87,7 @@
 }
 		<!-- Title bar start //-->
 
-<section class="title-bar bg-img-15 transparent-bg-secondary">
+<section class="title-bar bg-img-1 transparent-bg-secondary">
 
     <div class="container">
 
@@ -95,9 +95,9 @@
 
             <div class="col-lg-12">
 
-                <h1>Shop Catalog</h1>
+                <h1>Tarifs</h1>
 
-                <p>Donec orci eros, tristique sit amet odio vitae, auctor pharetra nisi. Mauris ornare euismod lorem et fringilla. In nec bibendum enim, id lobortis enim. Sed ac faucibus lectus, vitae imperdiet elit.</p>
+                @*<p>Donec orci eros, tristique sit amet odio vitae, auctor pharetra nisi. Mauris ornare euismod lorem et fringilla. In nec bibendum enim, id lobortis enim. Sed ac faucibus lectus, vitae imperdiet elit.</p>*@
 
             </div>
 
@@ -116,252 +116,116 @@
 
     <section>
 
-        <div class="container">
-
-            <div class="row">
-
-                <!-- Products start //-->
-
-                <div class="col-lg-8 col-md-7">
-
-                    <div class="row">
-
-                        <div class="col-lg-12">
-
-                            <p class="margin-top-0 font-bold text-uppercase heading-color">Aenean dapibus egestas est sit amet efficitur. Donec sit amet semper ex, ac scelerisque orci. Duis eget dolor et dolor condimentum luctus.</p>
-
-                            <p>Fusce accumsan augue nisl, in volutpat nisi tempus nec. Pellentesque nec congue urna. Proin tellus libero, ullamcorper sit amet aliquam a, euismod et dolor. Pellentesque a erat volutpat, ullamcorper mauris et, porta augue. Aenean iaculis accumsan leo. Integer sed metus eros. Pellentesque imperdiet hendrerit augue eget viverra. Nunc nec fringilla neque. </p>
-
-                            <div class="sort-products margin-bottom-30 margin-top-50">
-
-                                <form>
-
-                                    <label>
-
-                                        Sort by:
-
-                                        <select>
-
-                                            <option>price ASC</option>
-
-                                            <option>price DESC</option>
-
-                                            <option>quantity ASC</option>
-
-                                            <option>quantity DESC</option>
-
-                                            <option>rating ASC</option>
-
-                                            <option>rating DESC</option>
-
-                                        </select>
-
-                                    </label>
-
-                                </form>
-
-                            </div>
-
-                        </div>
-
-                        <!-- Product start //-->
-
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-
-                            <div class="product-item">
-
-                                <figure>
-
-                                    <img src="~/biss/img/shop/1.jpg" alt="">
-
-                                    <figcaption>
-
-                                        <a href="~/biss/img/shop/1.jpg" class="zoom"><i class="fa fa-search"></i></a>
-
-                                    </figcaption>
-
-                                </figure>
-
-                                <div class="product-details">
-
-                                    <p class="title"><a href="#">Licence 1 utilisateur</a></p>
-
-                                    <p class="price border-bottom-1">
-
-                                        @*<span class="line-through">75 000 F CFA</span>*@
-
-                                        <span class="normal">55 000 F CFA</span>
-                                    </p>
-
-                                    <p>
-
-                                        <a asp-controller="Home" asp-action="Shopcart" asp-route-id="1" class="to-cart"><i class="fa fa-plus"></i> acheter</a>
-
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <!-- Product end //-->
-                        <!-- Product start //-->
-
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-
-                            <div class="product-item">
-
-                                <figure>
-
-                                    <img src="~/biss/img/shop/2.jpg" alt="">
-
-                                    <figcaption>
-
-                                        <a href="~/biss/img/shop/2.jpg" class="zoom"><i class="fa fa-search"></i></a>
-
-                                    </figcaption>
-
-                                </figure>
-
-                                <div class="product-details">
-
-                                    <p class="title"><a href="#">License 5 Utilisateurs</a></p>
-
-                                    <p class="price border-bottom-1">
-
-                                        <span class="line-through">275 000 F CFA</span>
-
-                                        <span class="normal">250 000 F CFA</span>
-                                    </p>
-
-                                    <p>
-
-                                        <a asp-controller="Home" asp-action="Shopcart" asp-route-id="2" class="to-cart"><i class="fa fa-plus"></i> acheter</a>
-
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <!-- Product end //-->
-                        <!-- Product start //-->
-
-                        <div class="col-lg-4 col-md-6 col-sm-6">
-
-                            <div class="product-item">
-
-                                <figure>
-
-                                    <img src="~/biss/img/shop/3.jpg" alt="">
-
-                                    <figcaption>
-
-                                        <a href="~/biss/img/shop/3.jpg" class="zoom"><i class="fa fa-search"></i></a>
-
-                                    </figcaption>
-
-                                </figure>
-
-                                <div class="product-details">
-
-                                    <p class="title"><a href="#">License 10 Utilisateurs</a></p>
-
-                                    <p class="price border-bottom-1">
-
-                                        <span class="line-through">550 000 F CFA</span>
-
-                                        <span class="normal">500 000 F CFA</span>
-                                    </p>
-
-                                    <p>
-
-                                        <a asp-controller="Home" asp-action="Shopcart" asp-route-id="3" class="to-cart"><i class="fa fa-plus"></i> acheter</a>
-
-                                    </p>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-
-                        <!-- Product end //-->
+        
+
+
+        <div class="wrapper">
+            <!-- PRICING-TABLE CONTAINER -->
+            <div class="pricing-table group">
+                @*<h1 class="heading">
+                  Nos prix  
+                </h1>*@
+                <!-- PERSONAL -->
+                <div class="block personal fl">
+                    <h2 class="title">personnel</h2>
+                    <!-- CONTENT -->
+                    <div class="content">
+                        <p class="price">
+                            <sup>F CFA</sup>
+                            <span>55 000</span>
+                            @*<sub>/mo.</sub>*@
+                        </p>
+                        <p class="hint">Licence 1 utilisateur</p>
+                    </div>
+                    <!-- /CONTENT -->
+                    <!-- FEATURES -->
+                    <ul class="features" style="font-weight:bold;
+  font-size:medium;">
+                        <li><span class="fontawesome-cog" ></span>1 poste</li>
+                        <li><span class="fontawesome-star"></span>Toutes fonctionnalités incluses</li>
+                        <li><span class="fontawesome-dashboard"></span>Mises à jour gratuites</li>
+                        @*<li><span class="fontawesome-cloud"></span>10GB Local Storage</li>*@
+                    </ul>
+                    <!-- /FEATURES -->
+                    <!-- PT-FOOTER -->
+                    <div class="pt-footer">
+                        <a asp-controller="Home" asp-action="Shopcart" asp-route-id="1" class="to-cart" style="font-weight:bold;
+  font-size:medium;color:white;"><i class="fa fa-plus"></i> acheter</a>
 
                     </div>
-
+                    <!-- /PT-FOOTER -->
                 </div>
-
-                <!-- Products end //-->
-                <!-- Sidebar start //-->
-
-                <div class="col-lg-3 col-lg-offset-1 col-md-4 margin-top--70 sm-margin-top-0 md-margin-top-0">
-
-                    <!-- Search start //-->
-
-                    <aside class="widget widget-search">
-
-                        <h2 class="widget-title">search widget</h2>
-
-                        <div class="widget-content">
-
-                            <form>
-
-                                <input type="search" name="s" placeholder="type to search...">
-
-                                <button class="biss-btn biss-btn-primary"><i class="fa fa-search"></i></button>
-
-                            </form>
-
-                        </div>
-
-                    </aside>
-
-                    <!-- Search end //-->
-                    <!-- Categories start //-->
-
-                    <div class="widget widget-categories">
-
-                        <h2 class="widget-title">categories</h2>
-
-                        <div class="widget-content">
-
-                            <ul>
-
-                                <li><i class="fa fa-angle-right"></i> <a href="#">Frozen Flea</a> <span class="qty">( 12 )</span></li>
-
-                                <li><i class="fa fa-angle-right"></i> <a href="#">Severe Coffin</a> <span class="qty">( 4 )</span></li>
-
-                                <li><i class="fa fa-angle-right"></i> <a href="#">Purple Limousine</a> <span class="qty">( 45 )</span></li>
-
-                                <li><i class="fa fa-angle-right"></i> <a href="#">Endless Tuba</a> <span class="qty">( 17 )</span></li>
-
-                                <li><i class="fa fa-angle-right"></i> <a href="#">Tasty Neutron</a> <span class="qty">( 54 )</span></li>
-
-                                <li><i class="fa fa-angle-right"></i> <a href="#">Intense Storm</a> <span class="qty">( 4 )</span></li>
-
-                                <li><i class="fa fa-angle-right"></i> <a href="#">Northernmost Sad Space</a> <span class="qty">( 67 )</span></li>
-
-                            </ul>
-
-                        </div>
-
+                <!-- /PERSONAL -->
+                <!-- PROFESSIONAL -->
+                <div class="block professional fl">
+                    <h2 class="title">Professionnel</h2>
+                    <!-- CONTENT -->
+                    <div class="content">
+                        <p class="price">
+                            <sup>F CFA</sup>
+                            <span>250 000</span>
+                            @*<sub>/mo.</sub>*@
+                        </p>
+                        <p class="hint">Licence 5 utilisateurs</p>
                     </div>
-
-                    <!-- Categories end //-->
-
+                    <!-- /CONTENT -->
+                    <!-- FEATURES -->
+                    <ul class="features" style="font-weight:bold;
+  font-size:medium;">
+                        <li><span class="fontawesome-cog"></span>5 postes</li>
+                        <li><span class="fontawesome-star"></span>Toutes fonctionnalités incluses</li>
+                        <li><span class="fontawesome-dashboard"></span>Mises à jour gratuites</li>
+                        @*<li><span class="fontawesome-cloud"></span>10GB Local Storage</li>*@
+                    </ul>
+                    <!-- /FEATURES -->
+                    <!-- PT-FOOTER -->
+                    <div class="pt-footer">
+                        <a asp-controller="Home" asp-action="Shopcart" asp-route-id="2" class="to-cart" style="font-weight:bold;
+  font-size:medium;color:white;"><i class="fa fa-plus"></i>acheter</a>
+                    </div>
+                    <!-- /PT-FOOTER -->
                 </div>
-
+                <!-- /PROFESSIONAL -->
+                <!-- BUSINESS -->
+                <div class="block business fl">
+                    <h2 class="title">Business</h2>
+                    <!-- CONTENT -->
+                    <div class="content">
+                        <p class="price">
+                            <sup>F CFA</sup>
+                            <span>500 000</span>
+                            @*<sub>/mo.</sub>*@
+                        </p>
+                        <p class="hint">Licence 10 utilisateurs</p>
+                    </div>
+                    <!-- /CONTENT -->
+                    <!-- FEATURES -->
+                    <ul class="features" style="font-weight:bold;
+  font-size:medium;">
+                        <li><span class="fontawesome-cog"></span>10 postes</li>
+                        <li><span class="fontawesome-star"></span>Toutes fonctionnalités incluses</li>
+                        <li><span class="fontawesome-dashboard"></span>Mises à jour gratuites</li>
+                        @*<li><span class="fontawesome-cloud"></span>10GB Local Storage</li>*@
+                    </ul>
+                    <!-- /FEATURES -->
+                    <!-- PT-FOOTER -->
+                    <div class="pt-footer">
+                        <a asp-controller="Home" asp-action="Shopcart" asp-route-id="3" class="to-cart" style="font-weight:bold;
+  font-size:medium;color:white;"><i class="fa fa-plus"></i>acheter</a>
+                    </div>
+                    <!-- /PT-FOOTER -->
+                </div>
+                <!-- /BUSINESS -->
             </div>
-
+            <!-- /PRICING-TABLE -->
         </div>
 
     </section>
 
     <!-- Intro end //-->
+
+
+    
 
 </main>
 
