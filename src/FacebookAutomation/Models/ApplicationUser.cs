@@ -9,5 +9,7 @@ namespace FacebookAutomation.Models
     // Add profile data for application users by adding properties to the ApplicationUser class
     public class ApplicationUser : IdentityUser
     {
+        public int NbreTotalLicence { get; set; }
+        public int NbreValideLicence { get; set; }
     }
 }

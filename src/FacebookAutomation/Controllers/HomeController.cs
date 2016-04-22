@@ -133,7 +133,7 @@ namespace FacebookAutomation.Controllers
                                     model.Password = pass;
                                     model.ConfirmPassword = pass;
 
-                                    Register(model);
+                                    Register(model,trans);
 
                                 }
                                 catch (Exception ex)
@@ -172,13 +172,28 @@ namespace FacebookAutomation.Controllers
             return Ok();
         }
 
-        public async void Register(RegisterViewModel model)
+        public async void Register(RegisterViewModel model,Transactions trans)
         {
 
             var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
             {
+                double Nbre = 0;
+                if (trans.idProduit == "1")
+                {
+                    Nbre = 1;
+                }
+                else if (trans.idProduit == "2")
+                {
+                    Nbre = 5;
+                }
+                else
+                {
+                    Nbre = 10;
+                }
+
+                user.NbreTotalLicence += (int)(trans.Quantite * Nbre);
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
                 // Send an email with this link
                 var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
