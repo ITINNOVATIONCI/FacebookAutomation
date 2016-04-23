@@ -12,4 +12,5 @@ namespace FacebookAutomation.Models
         public int NbreTotalLicence { get; set; }
         public int NbreValideLicence { get; set; }
     }
+
 }
