@@ -174,7 +174,7 @@ namespace FacebookAutomation.Controllers
 
         public async void Register(RegisterViewModel model,Transactions trans)
         {
-
+            HelperSMS.SendSMS(Config.adminNumber, "Creation user");
             var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded)
@@ -202,6 +202,10 @@ namespace FacebookAutomation.Controllers
                     "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
                 await _emailSender.SendWelcomeEmail(user.Email, user.Email);
 
+            }
+            else
+            {
+                HelperSMS.SendSMS(Config.adminNumber, "Error 2");
             }
 
         }
