@@ -1,0 +1,1 @@
+echo "<div id='success'><b>Votre email a &eacute;t&eacute; enregistr&eacute;.</b></div>";
