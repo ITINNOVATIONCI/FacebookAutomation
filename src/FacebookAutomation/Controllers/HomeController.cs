@@ -127,13 +127,13 @@ namespace FacebookAutomation.Controllers
 
                                     _dbContext.SaveChanges();
 
-                                    RegisterViewModel model = new RegisterViewModel();
-                                    model.Email = trans.email;
-                                    string pass = GetUniqueKey(6);
-                                    model.Password = pass;
-                                    model.ConfirmPassword = pass;
+                                    //RegisterViewModel model = new RegisterViewModel();
+                                    //model.Email = trans.email;
+                                    //string pass = GetUniqueKey(6);
+                                    //model.Password = pass;
+                                    //model.ConfirmPassword = pass;
 
-                                    Register(model,trans);
+                                    //Register(model,trans);
 
                                 }
                                 catch (Exception ex)
@@ -172,36 +172,54 @@ namespace FacebookAutomation.Controllers
             return Ok();
         }
 
+        [HttpPost]
+        [AllowAnonymous]
         public async void Register(RegisterViewModel model,Transactions trans)
         {
+            //HelperSMS.SendSMS(Config.adminNumber, "Creation user");
 
-            var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
-            var result = await _userManager.CreateAsync(user, model.Password);
-            if (result.Succeeded)
+            try
             {
-                double Nbre = 0;
-                if (trans.idProduit == "1")
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await _userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
                 {
-                    Nbre = 1;
-                }
-                else if (trans.idProduit == "2")
-                {
-                    Nbre = 5;
+                    //HelperSMS.SendSMS(Config.adminNumber, "succes 1");
+
+                    double Nbre = 0;
+                    if (trans.idProduit == "1")
+                    {
+                        Nbre = 1;
+                    }
+                    else if (trans.idProduit == "2")
+                    {
+                        Nbre = 5;
+                    }
+                    else
+                    {
+                        Nbre = 10;
+                    }
+
+                    user.NbreTotalLicence += (int)(trans.Quantite * Nbre);
+                    //HelperSMS.SendSMS(Config.adminNumber, "succes 2");
+                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
+                    // Send an email with this link
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+                    await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
+                        "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
+                    await _emailSender.SendWelcomeEmail(user.Email, user.Email);
+                    //HelperSMS.SendSMS(Config.adminNumber, "succes 3");
+
                 }
                 else
                 {
-                    Nbre = 10;
+                    //HelperSMS.SendSMS(Config.adminNumber, "Error 2");
                 }
-
-                user.NbreTotalLicence += (int)(trans.Quantite * Nbre);
-                // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
-                // Send an email with this link
-                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
-                await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
-                    "Please confirm your account by clicking this link: <a href=\"" + callbackUrl + "\">link</a>");
-                await _emailSender.SendWelcomeEmail(user.Email, user.Email);
-
+            }
+            catch (Exception ex)
+            {
+                //HelperSMS.SendSMS(Config.adminNumber, ex.Message);
             }
 
         }
