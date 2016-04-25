@@ -141,7 +141,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
                     @*<h2 class="section-title">we'd love to discuss any project you have in mind</h2>*@
 
-                    <form class="comment-form margin-top-0" method="post">
+                    <form class="comment-form margin-top-0" method="post" action="~/newsletter/sendgrid_mail.php">
 
                         <div class="status" id="sendMessageStatus"></div>
 
@@ -185,7 +185,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
                             <label for="phone">Telephone (facultatif)</label>
 
-                            <input type="text" name="message-phone" id="message-phone" placeholder="your phone number...">
+                            <input type="text" name="message-phone" id="message-phone" placeholder="votre numero...">
 
                         </div>
 
@@ -193,13 +193,13 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
                             <label for="message">Message (obligatoire)</label>
 
-                            <textarea name="message-message" id="message-message" placeholder="your message..."></textarea>
+                            <textarea name="message-message" id="message-message" placeholder="votre message..."></textarea>
 
                         </div>
 
                         <div class="form-elem form-elem-full">
 
-                            <button class="biss-btn biss-btn-primary" id="formAddMessage"><i class="fa fa-paper-plane"></i> Envoyer votre message</button>
+                            <button class="biss-btn biss-btn-primary" id="formAddMessages"><i class="fa fa-paper-plane"></i> Envoyer votre message</button>
                             <img src="~/biss/img/loader.gif" alt="loader" vspace="5" hspace="5" id="loader" width="50" height="50" style="display:none;" /> 
 
                         </div>
