@@ -37,6 +37,7 @@
 /// <reference path="lib/jquery/dist/jquery.js" />
 /// <reference path="lib/jquery-validation/dist/jquery.validate.js" />
 /// <reference path="lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js" />
+/// <reference path="newsletter/addmessage.js" />
 /// <reference path="newsletter/js/addmail.js" />
 /// <reference path="newsletter/js/addmessage.js" />
 /// <reference path="newsletter/js/addmessagefooter.js" />
