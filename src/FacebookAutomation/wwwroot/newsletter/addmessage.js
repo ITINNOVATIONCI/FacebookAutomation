@@ -24,7 +24,7 @@ $(document).ready(function() {
 			data: { email_address: email, message: messg, name: nom,telephone:phone},
 			success: function(data)
 			{
-				alert(data);
+				//alert(data);
 				//$('#info').before(data);
 				//$('#success').before(data);
 				$('#loader').hide();
