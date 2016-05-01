@@ -85,7 +85,7 @@
 
 		<!-- Title bar start //-->
 
-<section class="title-bar bg-img-7 transparent-bg-secondary">
+<section class="title-bar transparent-bg-primary">
 
     <div class="container">
 
@@ -93,7 +93,7 @@
 
             <div class="col-lg-12">
 
-                <h1>Comment ça marche</h1>
+                <h1 style="color:#2d2c3d;">Félicitations! vous avez terminé.</h1>
 
                 @*<p>Donec orci eros, tristique sit amet odio vitae, auctor pharetra nisi. Mauris ornare euismod lorem et fringilla. In nec bibendum enim, id lobortis enim. Sed ac faucibus lectus, vitae imperdiet elit.</p>*@
 
@@ -120,113 +120,102 @@
 
                 <div class="col-lg-12 col-md-12 sm-margin-bottom-70 md-margin-bottom-70">
 
-                    <p class="margin-top-0">Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam sit amet ligula tempor tellus laoreet tincidunt. Proin ut elit maximus, pretium mauris in, feugiat dolor. Donec congue euismod orci quis sodales. Quisque imperdiet iaculis tempor. Nulla facilisi.</p>
+                   
 
-                    <!-- FAQ Sorting //-->
+                    <article class="post post-timeline">
 
-                    <div class="plugin-container riva-sorting margin-top-50" id="faq-sorting">
+                        <div class="timeline-bar">
 
-                        <!-- Filter //-->
+                            <div class="date">
 
-                        <div class="filters align-left">
+                                <span class="d">@ViewBag.jour</span>
 
-                            <span data-value="*" class="active">show all</span>
+                                <span class="my">@ViewBag.mois</span>
 
-                            <span data-value="web">web</span>
+                            </div>
 
-                            <span data-value="development">development</span>
+                            <div class="comments-count">
 
-                            <span data-value="html5">html5</span>
+                                <i class="fa fa-comments"></i>
 
-                            <span data-value="css3">css3</span>
-
-                            <span data-value="design">design</span>
-
-                            <span data-value="photoshop">photoshop</span>
-
-                        </div>
-
-                        <div class="listing">
-
-                            <div class="biss-accordion" data-active="2">
-
-                                <div class="item web">
-
-                                    <header>Cat Rusty <i class="toggle fa fa-plus"></i></header>
-
-                                    <div class="content">
-
-                                        <p>Nunc vitae egestas erat. Nulla bibendum purus a venenatis laoreet. Aenean finibus sapien et ligula sodales consectetur. Donec tincidunt orci vel enim rhoncus interdum vel eget elit.</p>
-
-                                    </div>
-
-                                </div>
-
-                                <div class="item development">
-
-                                    <header>Drill Discarded <i class="toggle fa fa-plus"></i></header>
-
-                                    <div class="content">
-
-                                        <p>Morbi scelerisque nibh in felis consectetur, at accumsan magna bibendum. Cras eleifend interdum lectus, sed vestibulum dui accumsan ac. Vivamus at tincidunt nibh. Sed sollicitudin dolor quis augue ornare tincidunt. Nam imperdiet, ex quis lobortis bibendum, nibh diam aliquet urna, quis convallis arcu orci eget est. </p>
-
-                                    </div>
-
-                                </div>
-
-                                <div class="item html5">
-
-                                    <header>Scarlet Alarm <i class="toggle fa fa-plus"></i></header>
-
-                                    <div class="content">
-
-                                        <p>Integer est massa, molestie nec ligula non, lacinia elementum odio. In quis felis massa. Suspendisse pretium sapien eget massa pretium, pharetra pulvinar justo pharetra. Sed consectetur magna vitae eros pellentesque, vel iaculis sapien luctus.</p>
-
-                                    </div>
-
-                                </div>
-
-                                <div class="item css3">
-
-                                    <header>Torpedo Lonesome <i class="toggle fa fa-plus"></i></header>
-
-                                    <div class="content">
-
-                                        <p>Nunc vitae egestas erat. Nulla bibendum purus a venenatis laoreet. Aenean finibus sapien et ligula sodales consectetur. Donec tincidunt orci vel enim rhoncus interdum vel eget elit.</p>
-
-                                    </div>
-
-                                </div>
-
-                                <div class="item design">
-
-                                    <header>Rough Star <i class="toggle fa fa-plus"></i></header>
-
-                                    <div class="content">
-
-                                        <p>Morbi scelerisque nibh in felis consectetur, at accumsan magna bibendum. Cras eleifend interdum lectus, sed vestibulum dui accumsan ac. Vivamus at tincidunt nibh. Sed sollicitudin dolor quis augue ornare tincidunt. Nam imperdiet, ex quis lobortis bibendum, nibh diam aliquet urna, quis convallis arcu orci eget est. </p>
-
-                                    </div>
-
-                                </div>
-
-                                <div class="item photoshop">
-
-                                    <header>Monday's Tiger <i class="toggle fa fa-plus"></i></header>
-
-                                    <div class="content">
-
-                                        <p>Integer est massa, molestie nec ligula non, lacinia elementum odio. In quis felis massa. Suspendisse pretium sapien eget massa pretium, pharetra pulvinar justo pharetra. Sed consectetur magna vitae eros pellentesque, vel iaculis sapien luctus.</p>
-
-                                    </div>
-
-                                </div>
+                                @*<span>12</span>*@
 
                             </div>
 
                         </div>
 
-                    </div>
+                        <div class="plugin-container" id="post-id">
+
+                            <a href="img/posts/gallery/1.jpg" class="post-img zoom gallery-post-id"><img src="img/posts/gallery/1.jpg" alt=""></a>
+
+                            <a href="img/posts/gallery/2.jpg" class="post-img zoom gallery-post-id"><img src="img/posts/gallery/2.jpg" alt=""></a>
+
+                            <a href="img/posts/gallery/3.jpg" class="post-img zoom gallery-post-id"><img src="img/posts/gallery/3.jpg" alt=""></a>
+
+                            <!-- Nav //-->
+
+                            <div class="riva-insert-menu-here"></div>
+
+                        </div>
+
+                        <!-- Post meta //-->
+
+                        <div class="meta">
+
+                            <span>
+
+                                <i class="fa fa-calendar"></i> @ViewBag.longdate
+
+                            </span>
+
+                            <span style="font-size:medium;font-weight:bold;">
+
+                                <i class="fa fa-picture-o"></i> <a href="#">INFORMATIONS IMPORTANTES</a> @*<a href="#">development</a>*@
+
+                            </span>
+
+                        </div>
+
+                        <!-- Post excerpt //-->
+
+                        <div class="content" style="font-size:medium;color:#2d2c3d;">
+
+                            <p class="title"><i class="fa fa-arrow-circle-right"></i> <a href="#"><b>Veuillez lire attentivement </b> </a></p>
+
+                            <p style="color:#2d2c3d">Nous vous avons envoyé un email contenant les informations suivantes : <br />
+                                <ul class="style-1" style="font-size:medium;">
+                                    <li>
+                                        <i class="fa fa-arrow-circle-right primary-color"></i>
+                                        <b>Votre login</b>
+
+                                    <li />
+                                    <li>
+                                        <i class="fa fa-arrow-circle-right primary-color"></i>
+                                        <b>Votre mot de passe</b>
+                                    </li>
+                                    <li>
+                                        <i class="fa fa-arrow-circle-right primary-color"></i>
+                                        <b>Le nombre de licences à activer</b>
+                                    </li>
+                                </ul>
+
+                            Ces informations vous permettrons de vous connecter à votre espace privé sur le site et valider votre licence d'utilisation du logiciel
+                             </p>
+
+                        </div>
+
+                        <!-- Post read more link //-->
+
+                        @*<div class="readmore">
+
+                            <p>Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Duis auctor semper justo ac posuere. Nulla eros arcu, gravida eu nisl ac, tempor ultrices orci. Etiam suscipit dolor vel neque gravida varius. Mauris rhoncus in nisi eu pretium...</p>
+
+
+                        </div>*@
+
+                    </article>
+
+
 
                 </div>
 

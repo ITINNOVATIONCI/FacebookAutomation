@@ -1,5 +1,5 @@
 <?php
-
+echo "olivierrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr";
 
 if(isset($_POST['email_address']) && isset($_POST['name']) && isset($_POST['message']) && isset($_POST['telephone']) )
 {
@@ -14,7 +14,7 @@ if(isset($_POST['email_address']) && isset($_POST['name']) && isset($_POST['mess
   
  
   $from='laressource@live.fr';
-  $to='laressource@live.fr';
+  $to='olaressource@gmail.com';
   
 $url = 'https://api.sendgrid.com/';
 $user = 'laressource';

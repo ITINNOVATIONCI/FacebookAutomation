@@ -14,10 +14,13 @@ using FacebookAutomation.ViewModels.Account;
 using Microsoft.AspNet.Identity;
 using FacebookAutomation.Services;
 using System.Security.Cryptography;
+using Mandrill.Requests.Messages;
+using Mandrill;
+using Mandrill.Models;
 
 namespace FacebookAutomation.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : Controller,IEmailSender
     {
         private TelemetryClient telemetry = new TelemetryClient();
         protected string URISignature = "http://api.sandbox.cinetpay.com/v1/?method=getSignatureByPost";
@@ -32,6 +35,11 @@ namespace FacebookAutomation.Controllers
         public string Name { get; set; }
         string signature;
         public string message { get; set; }
+
+
+        public static MandrillApi _mandrill = new MandrillApi("PqeG2o_2NPgYpX_PTLqAMg");
+        public static string EmailFromAddress = "olaressource@gmail.com";
+        public static string EmailFromName = "FacebookPub infos";
 
         public HomeController(ApplicationDbContext dbContext, UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IEmailSender emailSender, TelemetryClient Telemetry)
         {
@@ -126,14 +134,14 @@ namespace FacebookAutomation.Controllers
                                     trans.buyer_name = ci.transaction.buyer_name;
 
                                     _dbContext.SaveChanges();
+                                    
+                                    RegisterViewModel model = new RegisterViewModel();
+                                    model.Email = trans.email;
+                                    string pass = GetUniqueKey(6);
+                                    model.Password = pass;
+                                    model.ConfirmPassword = pass;
 
-                                    //RegisterViewModel model = new RegisterViewModel();
-                                    //model.Email = trans.email;
-                                    //string pass = GetUniqueKey(6);
-                                    //model.Password = pass;
-                                    //model.ConfirmPassword = pass;
-
-                                    //Register(model,trans);
+                                    Register(model,trans);
 
                                 }
                                 catch (Exception ex)
@@ -172,8 +180,8 @@ namespace FacebookAutomation.Controllers
             return Ok();
         }
 
-        [HttpPost]
-        [AllowAnonymous]
+        //[HttpPost]
+        //[AllowAnonymous]
         public async void Register(RegisterViewModel model,Transactions trans)
         {
             //HelperSMS.SendSMS(Config.adminNumber, "Creation user");
@@ -300,14 +308,31 @@ namespace FacebookAutomation.Controllers
         }
 
 
-        public IActionResult Contact()
+        public IActionResult Contact(string email_address,string message,string name,string telephone)
         {
-
+            //var rep= SendEmailAsync()
             return View();
         }
+        public IActionResult Contacts(string email, string message, string subject)
+        {
+            var rep = SendEmailAsync(email, subject, message);
+            return View("Contact");
+        }
+
 
         public IActionResult Error()
         {
+            return View();
+        }
+
+        public IActionResult Congratulation()
+        {
+
+            DateTime dt = DateTime.UtcNow;
+             ViewBag.jour = dt.Day;
+            ViewBag.mois = dt.ToString("MMM").ToUpper();
+            //int annee = dt.Year;
+            ViewBag.longdate = dt.ToLongDateString();
             return View();
         }
 
@@ -331,5 +356,26 @@ namespace FacebookAutomation.Controllers
             return result.ToString();
         }
 
+        public Task SendEmailAsync(string email, string subject, string message)
+        {
+            var lst = new List<Mandrill.Models.EmailAddress>();
+            //lst.Add(new Mandrill.Models.EmailAddress(email));
+            lst.Add(new Mandrill.Models.EmailAddress(EmailFromAddress));
+            var task = _mandrill.SendMessage(new SendMessageRequest(new EmailMessage
+            {
+                FromEmail = email,
+                FromName = EmailFromName,
+                Subject = subject,
+                To = lst,               
+                Html = "<p>Nouveau Mail reçu</p><br />"+ message
+            }));
+
+            return task;
+        }
+
+        public Task SendWelcomeEmail(string firstName, string email)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

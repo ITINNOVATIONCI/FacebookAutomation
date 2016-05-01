@@ -141,7 +141,8 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
                     @*<h2 class="section-title">we'd love to discuss any project you have in mind</h2>*@
 
-                    <form class="comment-form margin-top-0" method="post" action="~/newsletter/sendgrid_mail.php">
+
+                        <form class="comment-form margin-top-0" asp-action="Contacts" asp-controller="Home">
 
                         <div class="status" id="sendMessageStatus"></div>
 
@@ -159,9 +160,9 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
                         <div class="form-elem form-elem-full">
 
-                            <label for="name">Nom (obligatoire)</label>
+                            <label for="name">Objet (obligatoire)</label>
 
-                            <input type="text" name="message-name" id="message-name" placeholder="your name...">
+                            <input type="text" name="subject" id="message-name" placeholder="votre nom...">
 
                         </div>
 
@@ -169,7 +170,7 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
                             <label for="email">Email (obligatoire)</label>
 
-                            <input type="text" name="message-email" id="message-email" placeholder="your email...">
+                            <input type="text" name="email" id="message-email" placeholder="votre email...">
 
                         </div>
 
@@ -181,26 +182,26 @@ google.maps.event.addDomListener(window, 'load', initialize);
 
                         </div>*@
 
-                        <div class="form-elem form-elem-full">
+                        @*<div class="form-elem form-elem-full">
 
                             <label for="phone">Telephone (facultatif)</label>
 
-                            <input type="text" name="message-phone" id="message-phone" placeholder="votre numero...">
+                            <input type="text" name="phone" id="message-phone" placeholder="votre numero...">
 
-                        </div>
+                        </div>*@
 
                         <div class="form-elem form-elem-full">
 
                             <label for="message">Message (obligatoire)</label>
 
-                            <textarea name="message-message" id="message-message" placeholder="votre message..."></textarea>
+                            <textarea name="message" id="message-message" placeholder="votre message..."></textarea>
 
                         </div>
 
                         <div class="form-elem form-elem-full">
 
-                            <button class="biss-btn biss-btn-primary" id="formAddMessages"><i class="fa fa-paper-plane"></i> Envoyer votre message</button>
-                            <img src="~/biss/img/loader.gif" alt="loader" vspace="5" hspace="5" id="loader" width="50" height="50" style="display:none;" /> 
+                            <button type="submit" class="biss-btn biss-btn-primary" id="formAddMessages"><i class="fa fa-paper-plane"></i> Envoyer votre message</button>
+                            @*<img src="~/biss/img/loader.gif" alt="loader" vspace="5" hspace="5" id="loader" width="50" height="50" style="display:none;" />*@ 
 
                         </div>
 
