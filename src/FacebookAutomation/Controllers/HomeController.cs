@@ -119,6 +119,7 @@ namespace FacebookAutomation.Controllers
                 if (ci.transaction.cpm_result == "00")
                 {
                     try
+
                     {
                         Transactions trans = _dbContext.Transactions.Where(c => c.Id == ci.transaction.cpm_trans_id && c.Etat == "ACTIF" && c.status != "Terminer").FirstOrDefault();
 
