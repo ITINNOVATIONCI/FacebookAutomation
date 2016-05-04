@@ -26,7 +26,7 @@ namespace FacebookAutomation.Controllers
         protected string URISignature = "http://api.sandbox.cinetpay.com/v1/?method=getSignatureByPost";
         protected string URIStatus = "http://api.sandbox.cinetpay.com/v1/?method=checkPayStatus";
 
-        private readonly UserManager<ApplicationUser> _userManager;
+        private  UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private ApplicationDbContext _dbContext;
@@ -136,13 +136,13 @@ namespace FacebookAutomation.Controllers
 
                                     _dbContext.SaveChanges();
                                     
-                                    RegisterViewModel model = new RegisterViewModel();
-                                    model.Email = trans.email;
-                                    string pass = GetUniqueKey(6);
-                                    model.Password = pass;
-                                    model.ConfirmPassword = pass;
+                                    //RegisterViewModel model = new RegisterViewModel();
+                                    //model.Email = trans.email;
+                                    //string pass = GetUniqueKey(6);
+                                    //model.Password = pass;
+                                    //model.ConfirmPassword = pass;
 
-                                    Register(model,trans);
+                                    //Register(model,trans);
 
                                 }
                                 catch (Exception ex)
@@ -189,7 +189,7 @@ namespace FacebookAutomation.Controllers
 
             try
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email};
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -209,7 +209,11 @@ namespace FacebookAutomation.Controllers
                         Nbre = 10;
                     }
 
+                    
                     user.NbreTotalLicence += (int)(trans.Quantite * Nbre);
+
+                    var result1 = await _userManager.UpdateAsync(user);
+
                     //HelperSMS.SendSMS(Config.adminNumber, "succes 2");
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
                     // Send an email with this link
@@ -335,6 +339,86 @@ namespace FacebookAutomation.Controllers
             //int annee = dt.Year;
             ViewBag.longdate = dt.ToLongDateString();
             return View();
+        }
+
+        public IActionResult ListeUtilisateur()
+        {
+            var liste = _dbContext.Transactions.Where(t => t.statuscinetpay.ToUpper().Equals("SUCCES") && t.Etat == "ACTIF" 
+            && t.status.ToUpper() == "TERMINER").OrderBy(t=>t.DateTransaction);
+            
+            return View(liste.ToList());
+        }
+
+        public IActionResult CreerUtilisateur(string id)
+        {
+
+            //RegisterViewModel model = new RegisterViewModel();
+
+
+            try
+
+            {
+                Transactions trans = _dbContext.Transactions.Where(c => c.Id == id && c.Etat == "ACTIF"
+                && c.status == "Terminer" && c.statuscinetpay.ToUpper().Equals("SUCCES")).FirstOrDefault();
+
+                if (trans != null)
+                {
+                    if (trans.TypeTransaction == "COMMANDE")
+                    {
+                        try
+                        {
+                            ViewBag.Login = trans.Nom;
+                            string pass = GetUniqueKey(6);
+
+                            ViewBag.Password = pass;
+                            ViewBag.Email = trans.email;
+                            ViewBag.ConfirmPassword = pass;
+
+                            double Nbre = 0;
+                            if (trans.idProduit == "1")
+                            {
+                                Nbre = 1;
+                            }
+                            else if (trans.idProduit == "2")
+                            {
+                                Nbre = 5;
+                            }
+                            else
+                            {
+                                Nbre = 10;
+                            }
+
+
+                            ViewBag.NbreTotalLicence = (int)(trans.Quantite * Nbre);
+
+
+                        }
+                        catch (Exception ex)
+                        {
+                            trans.log = ex.Message;
+                            _dbContext.SaveChanges();
+
+                        }
+
+                    }
+                }
+                else
+                {
+                    HelperSMS.SendSMS(Config.adminNumber2, "Trans null");
+
+                }
+            }
+            catch (Exception)
+            {
+
+                HelperSMS.SendSMS(Config.adminNumber2, "Try Trans null");
+            }
+
+
+            //return Content("<form action='Register' controller='Account' id='frmTest' method='post'><input type='hidden' name='Email' value='" + model.Email + "' /><input type='hidden' name='Password' value='" + model.Password + "' /><input type='hidden' name='ConfirmPassword' value='" + model.ConfirmPassword + "' /></form><script>document.getElementById('frmTest').submit();</script>");
+
+            //return RedirectToAction("Register", "Account", model);
+             return View();
         }
 
         public string GetUniqueKey(int maxSize)

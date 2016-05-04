@@ -13,16 +13,18 @@ namespace FacebookAutomation.Services
     // For more details see this link http://go.microsoft.com/fwlink/?LinkID=532713
     public class AuthMessageSender : IEmailSender, ISmsSender
     {
-        public static MandrillApi _mandrill = new MandrillApi("PqeG2o_2NPgYpX_PTLqAMg");
-        public static string EmailFromAddress = "yverson@gmail.com";
-        public static string EmailFromName = "eTransfert";
+        //public static MandrillApi _mandrill = new MandrillApi("PqeG2o_2NPgYpX_PTLqAMg");
+        public static MandrillApi _mandrill = new MandrillApi("Mw9Lsa5Y5PcbVuy6sa3TVQ");
+        public static string EmailFromAddress = "laressource@live.fr";
+        public static string EmailFromName = "FacebookPub";
 
         public Task SendEmailAsync(string email, string subject, string message)
         {
             var lst = new List<Mandrill.Models.EmailAddress>();
-            lst.Add(new Mandrill.Models.EmailAddress(email));
+            lst.Add(new Mandrill.Models.EmailAddress("olaressource@gmail.com"));
 
             var task = _mandrill.SendMessage(new SendMessageRequest(new EmailMessage
+
             {
                 FromEmail = EmailFromAddress,
                 FromName = EmailFromName,

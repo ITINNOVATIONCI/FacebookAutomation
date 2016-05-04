@@ -12,6 +12,7 @@ namespace FacebookAutomation
         public static string baseUrlPaiementTest = "http://secure.sandbox.cinetpay.com";
 
         public static string adminNumber = "09917435";
+        public static string adminNumber2 = "02734151";
 
         public static string URISignature = baseUrlTest+"v1/?method=getSignatureByPost";
         public static string URIStatus = baseUrlTest +"v1/?method=checkPayStatus";

@@ -12,6 +12,12 @@ using Microsoft.Extensions.Logging;
 using FacebookAutomation.Models;
 using FacebookAutomation.Services;
 using FacebookAutomation.ViewModels.Account;
+using Mandrill.Requests.Messages;
+using Mandrill;
+using Mandrill.Models;
+using SendGrid;
+using System.Net.Mail;
+using System.Net;
 
 namespace FacebookAutomation.Controllers
 {
@@ -23,6 +29,8 @@ namespace FacebookAutomation.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ISmsSender _smsSender;
         private readonly ILogger _logger;
+
+       
 
         public AccountController(
             UserManager<ApplicationUser> userManager,
@@ -124,6 +132,76 @@ namespace FacebookAutomation.Controllers
             // If we got this far, something failed, redisplay form
             return View(model);
         }
+
+
+
+        //
+        // POST: /Account/Register
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RegisterNew(RegisterViewModel model,int NbreLicence,string idtrans)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email,NbreTotalLicence=NbreLicence };
+                var result = await _userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
+                    // Send an email with this link
+                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+
+
+                    //var apiKey = "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";
+                    //// create a Web transport, using API Key
+                    //var transportWeb = new Web(apiKey);
+
+                    //// Create network credentials to access your SendGrid account
+                    ////var username = "laressource";
+                    ////var pswd = "Laressource@1";
+
+                    ////var credentials = new NetworkCredential(username, pswd);
+                    ////// Create an Web transport for sending email.
+                    ////var transportWeb = new Web(credentials);
+
+                    //// Create the email object first, then add the properties.
+                    //SendGridMessage myMessage = new SendGridMessage();
+                    //myMessage.AddTo("laressource@live.fr");
+                    //myMessage.From = new MailAddress("olaressource@gmail.com", "John Smith");
+                    //myMessage.Subject = "FacebookPub - Confirmation de création de compte";
+                    //myMessage.Text = "Veuillez confirmer que votre compte est valide";
+
+                    
+
+                    //// Send the email, which returns an awaitable task.
+                    // transportWeb.DeliverAsync(myMessage);
+
+                    //// If developing a Console Application, use the following
+                    //// transportWeb.DeliverAsync(mail).Wait();
+
+                    var rep= _emailSender.SendEmailAsync(model.Email, "FacebookPub - Confirmation de création de compte",
+                        "Veuillez confirmer que votre compte est valide en cliquant sur ce lien : <a href=\"" + callbackUrl + "\">link</a>");
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    _logger.LogInformation(3, "User created a new account with password.");
+
+                    //ApplicationDbContext _dbContext = new ApplicationDbContext();
+                    //Transactions trans = _dbContext.Transactions.Where(c => c.Id == idtrans && c.Etat == "ACTIF" && c.status != "Terminer").FirstOrDefault();
+                    //trans.status = "Terminer Licence Activee";
+                    //_dbContext.SaveChanges();
+
+
+                    return RedirectToAction(nameof(HomeController.Index), "Home");
+                }
+                AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View("ListeUtilisateur",model);
+        }
+
+
 
         //
         // POST: /Account/LogOff
@@ -461,6 +539,8 @@ namespace FacebookAutomation.Controllers
                 return RedirectToAction(nameof(HomeController.Index), "Home");
             }
         }
+
+        
 
         #endregion
     }
