@@ -355,19 +355,7 @@ namespace FacebookAutomation.Controllers
                 var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
 
                 mparam = new MailerParametre();
-                //string lien = "<table class=\"textbutton\" align=\"center\" bgcolor=\"#3cb2d0\" border=\0\" cellspacing=\"0\" cellpadding=\"0\" style=\" border-radius:4px; box-shadow: 0px 2px 0px #dedfdf;\">< tr >< td height = \"55\" align = \"center\" style = \"font - family: 'Open Sans', Arial, sans - serif; font - size:16px; color:#7f8c8d; line-height:30px; font-weight: bold;padding-left: 25px;padding-right: 25px;\" >< a href = \""+callbackUrl+"\" > Réinitialiser le mot de passe </ a ></ td > </ tr >"+
-                //     "</ table > ";
-
-
-
-
-
-
-
-
-
-
-
+               
                 mparam.recipients = model.Email;
                 mparam.subject = "FacebookPub - Réinitialiser mot de passe";
                 mparam.text = "<b style=\"color:#333333;font-size:medium;\"> Pour r&eacute;initialiser votre votre mot de passe veuillez cliquer sur le bouton ci dessous.</b>";

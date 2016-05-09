@@ -168,14 +168,19 @@
 
                                     </li>
 
-                                   
+                                   @if (User.IsInRole("ADMIN"))
+                                   {
+
                                     <li>
 
-                                        <a asp-controller="Home" asp-action="ListeUtilisateur"><i class="fa fa-file-text-o"></i> Album <small>Capture d'ecran</small></a>
+                                        <a asp-controller="Home" asp-action="ListeUtilisateur"><i class="fa fa-file-text-o"></i> Admin <small>liste utilisateur</small></a>
 
                                     </li>
 
-                                    @*@if (User.Identity.IsAuthenticated)
+                                   }
+
+
+    @*@if (User.Identity.IsAuthenticated)
                                     {*@
 
                                         <li>

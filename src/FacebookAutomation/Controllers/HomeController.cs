@@ -54,7 +54,22 @@ namespace FacebookAutomation.Controllers
 
         public IActionResult Index()
         {
-            //var rep = HttpContext.User.GetUserName();
+            //CREER ROLE
+            //_dbContext.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole()
+            //{
+            //    Name = "ADMIN"
+            //});
+            //_dbContext.SaveChanges();
+
+            //ATTRIBUER ROLE
+            //ApplicationUser user = _dbContext.Users.Where(u => u.UserName.Equals("boamathieu@yahoo.fr", StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+           
+            //_userManager.AddToRoleAsync (user, "ADMIN");
+            
+
+            
+
+
             return View();
         }
 
@@ -318,7 +333,25 @@ namespace FacebookAutomation.Controllers
         }
         public IActionResult Contacts(string email, string message, string subject)
         {
-            var rep = SendEmailAsync(email, subject, message);
+            //var rep = SendEmailAsync(email, subject, message);
+
+            MailerParametre mparam = new MailerParametre();
+
+            mparam.recipients = email;
+            mparam.subject = "FacebookPub - Message client " + subject;
+            mparam.text = "<b style=\"color:#333333;font-size:medium;\">" +message+ "</b>";
+            mparam.html = "<b style=\"color:#333333;font-size:medium;\"> "+message+".</b>";
+
+            //mparam.templateEngine = "76bc2231-bf48-4266-9277-9a4f978c3e6e";
+            //mparam.Substitution = new Dictionary<string, string>();
+            //mparam.Substitution.Add("iti_subject", "Réinitialiser mot de passe");
+            //mparam.Substitution.Add("iti_callback", callbackUrl);
+
+
+           
+
+            Mailer.SendMail(mparam);
+
             return View("Contact");
         }
 
@@ -460,5 +493,12 @@ namespace FacebookAutomation.Controllers
         {
             throw new NotImplementedException();
         }
+
+
+
+
+
+
+
     }
 }

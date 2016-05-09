@@ -51,16 +51,36 @@ namespace FacebookAutomation.Services
                 myMessage.Text = parametre.text;
                 myMessage.Html = parametre.html;
 
-                // Enable template engine, you must send the template id
-                myMessage.EnableTemplateEngine(parametre.templateEngine);
-                //myMessage.AddSubstitution("iti_login", new List<string>() { "eTransfert" });
-                //myMessage.AddSubstitution("iti_password", new List<string>() { "p" });
-
-                foreach (var item in parametre.Substitution)
+                if (string.IsNullOrEmpty(parametre.templateEngine))
                 {
-                    myMessage.AddSubstitution(item.Key, new List<string>() { item.Value });
+                    
+                }
+                else
+                {
+                    // Enable template engine, you must send the template id
+                    myMessage.EnableTemplateEngine(parametre.templateEngine);
+                    //myMessage.AddSubstitution("iti_login", new List<string>() { "eTransfert" });
+                    //myMessage.AddSubstitution("iti_password", new List<string>() { "p" });
+
+
+                    try
+                    {
+                        foreach (var item in parametre.Substitution)
+                        {
+                            myMessage.AddSubstitution(item.Key, new List<string>() { item.Value });
+
+                        }
+                    }
+                    catch (Exception)
+                    {
+
+
+                    }
 
                 }
+
+                
+                
 
 
 
