@@ -27,6 +27,8 @@ namespace FacebookAutomation.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
+        private ApplicationDbContext _dbContext;
+        MailerParametre mparam;
         private readonly ISmsSender _smsSender;
         private readonly ILogger _logger;
 
@@ -37,12 +39,14 @@ namespace FacebookAutomation.Controllers
             SignInManager<ApplicationUser> signInManager,
             IEmailSender emailSender,
             ISmsSender smsSender,
+            ApplicationDbContext dbContext,
             ILoggerFactory loggerFactory)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _smsSender = smsSender;
+            _dbContext = dbContext;
             _logger = loggerFactory.CreateLogger<AccountController>();
         }
 
@@ -144,52 +148,51 @@ namespace FacebookAutomation.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email,NbreTotalLicence=NbreLicence };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, NbreTotalLicence = NbreLicence, EmailConfirmed = true };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
                     // Send an email with this link
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
-
-
-                    //var apiKey = "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";
-                    //// create a Web transport, using API Key
-                    //var transportWeb = new Web(apiKey);
-
-                    //// Create network credentials to access your SendGrid account
-                    ////var username = "laressource";
-                    ////var pswd = "Laressource@1";
-
-                    ////var credentials = new NetworkCredential(username, pswd);
-                    ////// Create an Web transport for sending email.
-                    ////var transportWeb = new Web(credentials);
-
-                    //// Create the email object first, then add the properties.
-                    //SendGridMessage myMessage = new SendGridMessage();
-                    //myMessage.AddTo("laressource@live.fr");
-                    //myMessage.From = new MailAddress("olaressource@gmail.com", "John Smith");
-                    //myMessage.Subject = "FacebookPub - Confirmation de création de compte";
-                    //myMessage.Text = "Veuillez confirmer que votre compte est valide";
+                    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
 
                     
 
-                    //// Send the email, which returns an awaitable task.
-                    // transportWeb.DeliverAsync(myMessage);
+                   // ApplicationDbContext _dbContext = new ApplicationDbContext();
+                    Transactions trans = _dbContext.Transactions.Where(c => c.Id == idtrans && c.Etat == "ACTIF" && c.status == "Terminer").FirstOrDefault();
+                   trans.status = "Terminer Licence Activee";
+                    _dbContext.SaveChanges();
 
-                    //// If developing a Console Application, use the following
-                    //// transportWeb.DeliverAsync(mail).Wait();
 
-                    var rep= _emailSender.SendEmailAsync(model.Email, "FacebookPub - Confirmation de création de compte",
-                        "Veuillez confirmer que votre compte est valide en cliquant sur ce lien : <a href=\"" + callbackUrl + "\">link</a>");
-                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    mparam = new MailerParametre();
+                    
+                    mparam.recipients = model.Email;
+                    mparam.subject = "FacebookPub - Vos parametres d'activation de compte";
+                    mparam.text = "<b style=\"color:#333333;font-size:14px;\">	Ces informations sont importantes, elles vous permettront de vous connecter à notre site. <br />Veuillez les conserver soigneusement. </b>";
+                    mparam.html = "<b style=\"color:#333333;font-size:14px;\">	Ces informations sont importantes, elles vous permettront de vous connecter à notre site. <br />Veuillez les conserver soigneusement. </b>";
+                    
+                    mparam.templateEngine = "dff5c33e-4795-4fcc-9782-9feace23aff5";
+                    mparam.Substitution = new Dictionary<string, string>();
+                    mparam.Substitution.Add("iti_login", model.Email);
+                    mparam.Substitution.Add("iti_password", model.Password);
+                    mparam.Substitution.Add("iti_subject", "Vos parametres de connexion");
+
+
+
+                    Mailer.SendMail(mparam);
+
+
+
+
+
+
+
+                    //await _emailSender.SendEmailAsync(model.Email, "FacebookPub - Confirmation de création de compte",
+                    //    "Veuillez confirmer que votre compte est valide en cliquant sur ce lien : <a href=\"" + callbackUrl + "\">link</a>");
+                    //await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation(3, "User created a new account with password.");
 
-                    //ApplicationDbContext _dbContext = new ApplicationDbContext();
-                    //Transactions trans = _dbContext.Transactions.Where(c => c.Id == idtrans && c.Etat == "ACTIF" && c.status != "Terminer").FirstOrDefault();
-                    //trans.status = "Terminer Licence Activee";
-                    //_dbContext.SaveChanges();
 
 
                     return RedirectToAction(nameof(HomeController.Index), "Home");
@@ -348,11 +351,43 @@ namespace FacebookAutomation.Controllers
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=532713
                 // Send an email with this link
-                //var code = await _userManager.GeneratePasswordResetTokenAsync(user);
-                //var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+                var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+
+                mparam = new MailerParametre();
+                //string lien = "<table class=\"textbutton\" align=\"center\" bgcolor=\"#3cb2d0\" border=\0\" cellspacing=\"0\" cellpadding=\"0\" style=\" border-radius:4px; box-shadow: 0px 2px 0px #dedfdf;\">< tr >< td height = \"55\" align = \"center\" style = \"font - family: 'Open Sans', Arial, sans - serif; font - size:16px; color:#7f8c8d; line-height:30px; font-weight: bold;padding-left: 25px;padding-right: 25px;\" >< a href = \""+callbackUrl+"\" > Réinitialiser le mot de passe </ a ></ td > </ tr >"+
+                //     "</ table > ";
+
+
+
+
+
+
+
+
+
+
+
+                mparam.recipients = model.Email;
+                mparam.subject = "FacebookPub - Réinitialiser mot de passe";
+                mparam.text = "<b style=\"color:#333333;font-size:medium;\"> Pour r&eacute;initialiser votre votre mot de passe veuillez cliquer sur le bouton ci dessous.</b>";
+                mparam.html = "<b style=\"color:#333333;font-size:medium;\"> Pour r&eacute;initialiser votre votre mot de passe veuillez cliquer sur le bouton ci dessous.</b>";
+
+                mparam.templateEngine = "76bc2231-bf48-4266-9277-9a4f978c3e6e";
+                mparam.Substitution = new Dictionary<string, string>();
+                mparam.Substitution.Add("iti_subject", "Réinitialiser mot de passe");
+                mparam.Substitution.Add("iti_callback", callbackUrl);
+                
+
+
+
+                Mailer.SendMail(mparam);
+
+
+
                 //await _emailSender.SendEmailAsync(model.Email, "Reset Password",
                 //   "Please reset your password by clicking here: <a href=\"" + callbackUrl + "\">link</a>");
-                //return View("ForgotPasswordConfirmation");
+                return View("ForgotPasswordConfirmation");
             }
 
             // If we got this far, something failed, redisplay form

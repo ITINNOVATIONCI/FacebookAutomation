@@ -45,12 +45,12 @@ namespace FacebookAutomation.Controllers
         public async Task<IActionResult> Index(ManageMessageId? message = null)
         {
             ViewData["StatusMessage"] =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
+                message == ManageMessageId.ChangePasswordSuccess ? "Votre mot de passe a ete modifié avec succes."
+                : message == ManageMessageId.SetPasswordSuccess ? "Votre mot de passe a ete configuré avec succes."
                 : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
-                : message == ManageMessageId.Error ? "An error has occurred."
-                : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
-                : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                : message == ManageMessageId.Error ? "une erreur est survenue."
+                : message == ManageMessageId.AddPhoneSuccess ? "Votre numéro de telephone a été ajouté avec succes."
+                : message == ManageMessageId.RemovePhoneSuccess ? "Votre numéro de telephone a été supprimé avec succes."
                 : "";
 
             var user = await GetCurrentUserAsync();

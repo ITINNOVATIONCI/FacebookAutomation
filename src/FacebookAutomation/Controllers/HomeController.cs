@@ -17,6 +17,7 @@ using System.Security.Cryptography;
 using Mandrill.Requests.Messages;
 using Mandrill;
 using Mandrill.Models;
+using System.Security.Claims;
 
 namespace FacebookAutomation.Controllers
 {
@@ -47,11 +48,13 @@ namespace FacebookAutomation.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
             telemetry = Telemetry;
-
+            
+           
         }
 
         public IActionResult Index()
         {
+            //var rep = HttpContext.User.GetUserName();
             return View();
         }
 
@@ -135,14 +138,9 @@ namespace FacebookAutomation.Controllers
                                     trans.buyer_name = ci.transaction.buyer_name;
 
                                     _dbContext.SaveChanges();
-                                    
-                                    //RegisterViewModel model = new RegisterViewModel();
-                                    //model.Email = trans.email;
-                                    //string pass = GetUniqueKey(6);
-                                    //model.Password = pass;
-                                    //model.ConfirmPassword = pass;
 
-                                    //Register(model,trans);
+                                    HelperSMS.SendSMS(Config.adminNumber2, "Facebookpub achat effectué. montant:"+trans.Total);
+                                    HelperSMS.SendSMS(Config.adminNumber, "Facebookpub achat effectué. montant:"+trans.Total);
 
                                 }
                                 catch (Exception ex)
@@ -390,7 +388,7 @@ namespace FacebookAutomation.Controllers
 
 
                             ViewBag.NbreTotalLicence = (int)(trans.Quantite * Nbre);
-
+                            ViewBag.idtrans = id;
 
                         }
                         catch (Exception ex)

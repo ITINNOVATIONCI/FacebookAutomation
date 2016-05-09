@@ -9,9 +9,9 @@
     <title>@ViewData["Title"] - FacebookAutomation</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="facebookpub,faire publicité sur facebook">
+    <meta name="description" content="facebookpub,faire la publicité sur facebook,pub sur facebook">
     <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1" />
-    <meta name="description" content="publication automatique facebook">
+    <meta name="description" content="Automatisez la publication de vos posts facebook">
     <meta name="author" content="Itinnovation">
     <link rel="shortcut icon" href="favicon.ico">
 
@@ -168,17 +168,24 @@
 
                                     </li>
 
+                                   
                                     <li>
 
                                         <a asp-controller="Home" asp-action="ListeUtilisateur"><i class="fa fa-file-text-o"></i> Album <small>Capture d'ecran</small></a>
 
                                     </li>
 
-                                    <li>
+                                    @*@if (User.Identity.IsAuthenticated)
+                                    {*@
 
-                                        <a asp-controller="Home" asp-action="Faq"><i class="fa fa-pencil"></i> Aide <small>Comment ca marche</small></a>
+                                        <li>
 
-                                    </li>
+                                            <a asp-controller="Home" asp-action="Faq"><i class="fa fa-pencil"></i> Aide <small>Comment ca marche</small></a>
+
+                                        </li>
+                                     
+                                   @* }*@
+                                    
 
                                     <li><a asp-controller="Home" asp-action="Contact"><i class="fa fa-envelope"></i> Contacts <small>Nous contacter</small></a></li>
 
@@ -225,7 +232,7 @@
 
                                         <div class="flickr-1">
 
-                                            <script type="text/javascript" src="http://www.flickr.com/badge_code_v2.gne?count=6&amp;display=latest&amp;size=s&amp;layout=x&amp;source=user&amp;user=52617155@N08"></script>
+                                            @*<script type="text/javascript" src="http://www.flickr.com/badge_code_v2.gne?count=6&amp;display=latest&amp;size=s&amp;layout=x&amp;source=user&amp;user=52617155@N08"></script>*@
 
                                         </div>
 

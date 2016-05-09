@@ -120,169 +120,156 @@
 
                 <div class="col-lg-12 col-md-12 sm-margin-bottom-70 md-margin-bottom-70">
 
-                    <p class="margin-top-0">Interdum et malesuada fames ac ante ipsum primis in faucibus. Nam sit amet ligula tempor tellus laoreet tincidunt. Proin ut elit maximus, pretium mauris in, feugiat dolor. Donec congue euismod orci quis sodales. Quisque imperdiet iaculis tempor. Nulla facilisi.</p>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <div class="plugin-container riva-sorting margin-top-50" id="faq-sorting">
 
-                    <!-- FAQ Sorting //-->
+                            <!-- Filter //-->
+                            @*<div class="filters align-left">
 
-                    <div class="plugin-container riva-sorting margin-top-50" id="faq-sorting">
+                                    <span data-value="*" class="active">show all</span>
 
-                        <!-- Filter //-->
+                                    <span data-value="web">web</span>
 
-                        <div class="filters align-left">
+                                    <span data-value="development">development</span>
 
-                            <span data-value="*" class="active">show all</span>
+                                    <span data-value="html5">html5</span>
 
-                            <span data-value="web">web</span>
+                                    <span data-value="css3">css3</span>
 
-                            <span data-value="development">development</span>
+                                    <span data-value="design">design</span>
 
-                            <span data-value="html5">html5</span>
+                                    <span data-value="photoshop">photoshop</span>
 
-                            <span data-value="css3">css3</span>
+                                </div>*@
 
-                            <span data-value="design">design</span>
+                            <div class="listing">
 
-                            <span data-value="photoshop">photoshop</span>
 
-                        </div>
 
-                        <div class="listing">
 
-                            <div class="biss-accordion" data-active="2">
 
-                                <div class="item web">
+                                <div class="biss-accordion" data-active="1">
 
-                                    <header>Cat Rusty <i class="toggle fa fa-plus"></i></header>
+                                    <div class="item design">
 
-                                    <div class="content">
+                                        <header style="font-weight:bold;">Comment programmer automatiquement des posts <i class="toggle fa fa-plus"></i></header>
 
-                                        <p>Nunc vitae egestas erat. Nulla bibendum purus a venenatis laoreet. Aenean finibus sapien et ligula sodales consectetur. Donec tincidunt orci vel enim rhoncus interdum vel eget elit.</p>
+                                        <div class="content">
 
-                                    </div>
+                                            <p>
+                                                <iframe width="560" height="315" src="https://www.youtube.com/embed/cA6R_B5nebc" frameborder="0" allowfullscreen></iframe>
+                                            </p>
 
-                                </div>
-
-                                <div class="item development">
-
-                                    <header>Drill Discarded <i class="toggle fa fa-plus"></i></header>
-
-                                    <div class="content">
-
-                                        <p>Morbi scelerisque nibh in felis consectetur, at accumsan magna bibendum. Cras eleifend interdum lectus, sed vestibulum dui accumsan ac. Vivamus at tincidunt nibh. Sed sollicitudin dolor quis augue ornare tincidunt. Nam imperdiet, ex quis lobortis bibendum, nibh diam aliquet urna, quis convallis arcu orci eget est. </p>
+                                        </div>
 
                                     </div>
 
-                                </div>
+                                    <div class="item web">
 
-                                <div class="item html5">
+                                        <header style="font-weight:bold;">Commment ajouter un compte facebook dans le logiciel <i class="toggle fa fa-plus"></i></header>
 
-                                    <header>Scarlet Alarm <i class="toggle fa fa-plus"></i></header>
+                                        <div class="content">
 
-                                    <div class="content">
+                                            <p>
 
-                                        <p>Integer est massa, molestie nec ligula non, lacinia elementum odio. In quis felis massa. Suspendisse pretium sapien eget massa pretium, pharetra pulvinar justo pharetra. Sed consectetur magna vitae eros pellentesque, vel iaculis sapien luctus.</p>
 
-                                    </div>
 
-                                </div>
+                                                <iframe width="560" height="315" src="https://www.youtube.com/embed/A-lXm3tn7tk?list=PL4fmYqlN1gAw6gXtsXwukeRKvyhE5ZVVS#t=0m20s" frameborder="0" allowfullscreen></iframe>
 
-                                <div class="item css3">
+                                            </p>
 
-                                    <header>Torpedo Lonesome <i class="toggle fa fa-plus"></i></header>
-
-                                    <div class="content">
-
-                                        <p>Nunc vitae egestas erat. Nulla bibendum purus a venenatis laoreet. Aenean finibus sapien et ligula sodales consectetur. Donec tincidunt orci vel enim rhoncus interdum vel eget elit.</p>
+                                        </div>
 
                                     </div>
 
-                                </div>
+                                    <div class="item development">
 
-                                <div class="item design">
+                                        <header style="font-weight:bold;">Comment accepter automatiquement les demandes d'amis et programmer l'envoi d'un message privé de bienvenue<i class="toggle fa fa-plus"></i></header>
 
-                                    <header>Rough Star <i class="toggle fa fa-plus"></i></header>
+                                        <div class="content">
 
-                                    <div class="content">
+                                            <p>
+                                                <iframe width="560" height="315" src="https://www.youtube.com/embed/TIauONUNDTc?list=PL4fmYqlN1gAw6gXtsXwukeRKvyhE5ZVVS" frameborder="0" allowfullscreen></iframe>
+                                            </p>
 
-                                        <p>Morbi scelerisque nibh in felis consectetur, at accumsan magna bibendum. Cras eleifend interdum lectus, sed vestibulum dui accumsan ac. Vivamus at tincidunt nibh. Sed sollicitudin dolor quis augue ornare tincidunt. Nam imperdiet, ex quis lobortis bibendum, nibh diam aliquet urna, quis convallis arcu orci eget est. </p>
+                                        </div>
+
+                                    </div>
+
+                                    <div class="item html5">
+
+                                        <header style="font-weight:bold;">Comment publier automatiquement des posts dans un groupe <i class="toggle fa fa-plus"></i></header>
+
+                                        <div class="content">
+
+                                            <p>
+
+                                                <iframe width="560" height="315" src="https://www.youtube.com/embed/cA6R_B5nebc?list=PL4fmYqlN1gAw6gXtsXwukeRKvyhE5ZVVS" frameborder="0" allowfullscreen></iframe>
+
+                                            </p>
+
+                                        </div>
 
                                     </div>
 
-                                </div>
+                                    <div class="item css3">
 
-                                <div class="item photoshop">
+                                        <header style="font-weight:bold;">Comment partager des posts / photos sur des pages facebook  <i class="toggle fa fa-plus"></i></header>
 
-                                    <header>Monday's Tiger <i class="toggle fa fa-plus"></i></header>
+                                        <div class="content">
 
-                                    <div class="content">
+                                            <p>
 
-                                        <p>Integer est massa, molestie nec ligula non, lacinia elementum odio. In quis felis massa. Suspendisse pretium sapien eget massa pretium, pharetra pulvinar justo pharetra. Sed consectetur magna vitae eros pellentesque, vel iaculis sapien luctus.</p>
+                                                <iframe width="560" height="315" src="https://www.youtube.com/embed/FZJnII-2nmg?list=PL4fmYqlN1gAw6gXtsXwukeRKvyhE5ZVVS#t=0m5s" frameborder="0" allowfullscreen></iframe>
+
+                                            </p>
+
+                                        </div>
 
                                     </div>
+
+
+
+                                    @*<div class="item photoshop">
+
+                                            <header>Monday's Tiger <i class="toggle fa fa-plus"></i></header>
+
+                                            <div class="content">
+
+                                                <p>Integer est massa, molestie nec ligula non, lacinia elementum odio. In quis felis massa. Suspendisse pretium sapien eget massa pretium, pharetra pulvinar justo pharetra. Sed consectetur magna vitae eros pellentesque, vel iaculis sapien luctus.</p>
+
+                                            </div>
+
+                                        </div>*@
 
                                 </div>
 
                             </div>
 
                         </div>
+                    }
+                    else
+                    {
+                        <p class="margin-top-0"  style="font-size:large;">
+                            Veuillez vous connecter pour voir les videos de formation sur le logiciel.
+                        </p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                        <p>&nbsp;</p>
+                    }
+                   
 
-                    </div>
+                    <!-- FAQ Sorting //-->
+
+                    
 
                 </div>
 
-                @*<div class="col-lg-5 col-md-5">
-
-                    <h3 class="margin-top-0">feel free to contact us</h3>
-
-                    <div class="call-us">
-
-                        <p>Tall free:</p>
-
-                        <p class="phone">8-800-401-290-4771</p>
-
-                        <p class="phone">8-800-508-326-6368</p>
-
-                        <p class="margin-top-20"><a href="#" class="biss-btn biss-btn-white">drop us a line</a></p>
-
-                    </div>
-
-                    <div class="clearfix"></div>
-
-                    <p>Proin vestibulum ullamcorper ultrices. Ut ullamcorper, enim a ultrices volutpat, nibh velit malesuada sapien, non pulvinar nulla risus sit amet dolor. Etiam varius in sem nec porttitor. </p>
-
-                    <p>&nbsp;</p>
-
-                    <div class="service-2">
-
-                        <i class="fa fa-magic"></i>
-
-                        <p class="title">Deserted Avenue</p>
-
-                        <p>Duis vel augue facilisis nunc condimentum malesuada. Aenean aliquam lorem eget pharetra laoreet.</p>
-
-                    </div>
-
-                    <div class="service-2">
-
-                        <i class="fa fa-briefcase"></i>
-
-                        <p class="title">Rainbow Western Roadrunner</p>
-
-                        <p>Quisque blandit, quam ac vulputate tincidunt, sapien odio viverra neque, sit amet varius velit magna ut magna. </p>
-
-                    </div>
-
-                    <div class="service-2 margin-bottom-0">
-
-                        <i class="fa fa-dashboard"></i>
-
-                        <p class="title">Sienna Alpha</p>
-
-                        <p>Cum sociis natoque penatibus et magnis dis parturient montes, ullamcorper nascetur ridiculus mus. </p>
-
-                    </div>
-
-                </div>*@
+               
 
             </div>
 

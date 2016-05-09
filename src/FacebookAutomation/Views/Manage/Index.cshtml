@@ -1,6 +1,6 @@
 ﻿@model IndexViewModel
 @{
-    ViewData["Title"] = "Manage your account";
+    ViewData["Title"] = "Gestion de compte";
 }
 
 
@@ -28,28 +28,33 @@
 
 
 
-                    <h4>Change your account settings</h4>
+                    <h4>Modifier les paramètres de compte</h4>
                     <hr />
-                    <dl class="dl-horizontal">
-                        <dt>Password:</dt>
+                    <dl class="dl-horizontal" style="font-size:large;">
+                        <dt>Mot de passe :</dt>
                         <dd>
                             @if (Model.HasPassword)
             {
-                                <text>[&nbsp;&nbsp;<a asp-controller="Manage" asp-action="ChangePassword">Change</a>&nbsp;&nbsp;]</text>
+                                <text>[&nbsp;&nbsp;<a asp-controller="Manage" asp-action="ChangePassword">Modifier</a>&nbsp;&nbsp;]</text>
                             }
                             else
                             {
                                 <text>[&nbsp;&nbsp;<a asp-controller="Manage" asp-action="SetPassword">Create</a>&nbsp;&nbsp;]</text>
                             }
                         </dd>
+                        <dt>&nbsp;</dt>
+                        <dd>&nbsp;</dd>
                         <dt>Gestion des licences:</dt>
                         <dd>
                             @Model.NbreLicence Licences a enregistrer @if (Model.NbreLicence > 0)
-                            {<text>[<a asp-controller="Manage" asp-action="ValiderLicence">Enregistrer une licence</a>&nbsp;&nbsp;]</text>}
+                            {<text>[<a asp-controller="Manage" asp-action="ValiderLicence" style="color:#c83650;">Enregistrer une licence</a>&nbsp;&nbsp;]</text>}
                         </dd>
                     </dl>
 
-
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
+                    <p>&nbsp;</p>
 
                     </div>
                 </div>
