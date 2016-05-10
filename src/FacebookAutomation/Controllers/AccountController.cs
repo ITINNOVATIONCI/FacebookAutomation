@@ -157,9 +157,9 @@ namespace FacebookAutomation.Controllers
                     //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
 
-                    
+                    var callbackUrl = Url.Action("Index", "Home", new { }, protocol: HttpContext.Request.Scheme);
 
-                   // ApplicationDbContext _dbContext = new ApplicationDbContext();
+                    // ApplicationDbContext _dbContext = new ApplicationDbContext();
                     Transactions trans = _dbContext.Transactions.Where(c => c.Id == idtrans && c.Etat == "ACTIF" && c.status == "Terminer").FirstOrDefault();
                    trans.status = "Terminer Licence Activee";
                     _dbContext.SaveChanges();
@@ -177,7 +177,7 @@ namespace FacebookAutomation.Controllers
                     mparam.Substitution.Add("iti_login", model.Email);
                     mparam.Substitution.Add("iti_password", model.Password);
                     mparam.Substitution.Add("iti_subject", "Vos parametres de connexion");
-
+                    mparam.Substitution.Add("iti_callback", callbackUrl);
 
 
                     Mailer.SendMail(mparam);

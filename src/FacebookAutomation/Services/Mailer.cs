@@ -19,10 +19,11 @@ namespace FacebookAutomation.Services
             {
                 /* CREDENTIALS
                  * ===================================================*/
-                string sgUsername = "azure_da0713702f435dcc22edd7c82dd05341@azure.com";
-                string sgPassword = "P@ssw0rd2012";
+                //string sgUsername = "azure_da0713702f435dcc22edd7c82dd05341@azure.com";
+                //string sgPassword = "P@ssw0rd2012";
 
-                
+                string sgUsername = "";
+                string sgPassword = "";
                 /* MAIL SETTINGS
                  * Fill in the relevant information below.
                  * ===================================================*/
