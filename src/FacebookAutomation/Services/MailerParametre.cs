@@ -17,9 +17,6 @@ namespace FacebookAutomation.Services
 
 
         public Dictionary<string, string> Substitution { get; set; }
-         
-        //public static string sgUsername = "azure_da0713702f435dcc22edd7c82dd05341@azure.com";
-        //public static string sgPassword = "P@ssw0rd2012";
 
 
     }
