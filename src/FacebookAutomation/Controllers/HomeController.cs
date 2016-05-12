@@ -18,6 +18,7 @@ using Mandrill.Requests.Messages;
 using Mandrill;
 using Mandrill.Models;
 using System.Security.Claims;
+using Microsoft.Azure.NotificationHubs;
 
 namespace FacebookAutomation.Controllers
 {
@@ -63,15 +64,16 @@ namespace FacebookAutomation.Controllers
 
             //ATTRIBUER ROLE
             //ApplicationUser user = _dbContext.Users.Where(u => u.UserName.Equals("boamathieu@yahoo.fr", StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
-           
+
             //_userManager.AddToRoleAsync (user, "ADMIN");
-            
 
-            
 
+
+            //SendNotificationAsync();
 
             return View();
         }
+
 
         public IActionResult About()
         {
@@ -154,8 +156,9 @@ namespace FacebookAutomation.Controllers
 
                                     _dbContext.SaveChanges();
 
-                                    HelperSMS.SendSMS(Config.adminNumber2, "Facebookpub achat effectué. montant:"+trans.Total);
-                                    HelperSMS.SendSMS(Config.adminNumber, "Facebookpub achat effectué. montant:"+trans.Total);
+                                    SendNotificationAsync("Facebookpub achat effectué. ID:"+ trans.Id +" email:" + trans.email);
+                                    //HelperSMS.SendSMS(Config.adminNumber2, "Facebookpub achat effectué. montant:"+trans.Total);
+                                    //HelperSMS.SendSMS(Config.adminNumber, "Facebookpub achat effectué. montant:"+trans.Total);
 
                                 }
                                 catch (Exception ex)
@@ -492,6 +495,20 @@ namespace FacebookAutomation.Controllers
         public Task SendWelcomeEmail(string firstName, string email)
         {
             throw new NotImplementedException();
+        }
+
+
+        private static async void SendNotificationAsync(string message)
+        {
+            NotificationHubClient hub = NotificationHubClient.CreateClientFromConnectionString("Endpoint=sb://itiappns.servicebus.windows.net/;SharedAccessKeyName=DefaultFullSharedAccessSignature;SharedAccessKey=7DGSFfearJ1P7lwJwAIx31gC98lTQuC2ZplGXYCiLTA=", "etransfert");
+
+
+            Dictionary<string, string> templateParams = new Dictionary<string, string>();
+
+            //templateParams["message"] = "{ \"data\" : {\"message\":\"Hello from Azure!\"}}";
+            var res = await hub.SendGcmNativeNotificationAsync("{ \"data\" : {\"message\":" + message +"}}", new List<string>() { "etransfert" });
+            //var res = await hub.SendTemplateNotificationAsync(templateParams, "etransfert");
+
         }
 
 
