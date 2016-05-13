@@ -22,13 +22,13 @@ using Microsoft.Azure.NotificationHubs;
 
 namespace FacebookAutomation.Controllers
 {
-    public class HomeController : Controller,IEmailSender
+    public class HomeController : Controller, IEmailSender
     {
         private TelemetryClient telemetry = new TelemetryClient();
         protected string URISignature = "http://api.sandbox.cinetpay.com/v1/?method=getSignatureByPost";
         protected string URIStatus = "http://api.sandbox.cinetpay.com/v1/?method=checkPayStatus";
 
-        private  UserManager<ApplicationUser> _userManager;
+        private UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
         private ApplicationDbContext _dbContext;
@@ -49,8 +49,8 @@ namespace FacebookAutomation.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
             telemetry = Telemetry;
-            
-           
+
+
         }
 
         public IActionResult Index()
@@ -69,7 +69,7 @@ namespace FacebookAutomation.Controllers
 
 
 
-            //SendNotificationAsync();
+            //SendNotificationAsync("BOA MATHIEU");
 
             return View();
         }
@@ -156,7 +156,7 @@ namespace FacebookAutomation.Controllers
 
                                     _dbContext.SaveChanges();
 
-                                    SendNotificationAsync("Facebookpub achat effectué. ID:"+ trans.Id +" email:" + trans.email);
+                                    SendNotificationAsync("Facebookpub achat effectué. ID:" + trans.Id + "");
                                     //HelperSMS.SendSMS(Config.adminNumber2, "Facebookpub achat effectué. montant:"+trans.Total);
                                     //HelperSMS.SendSMS(Config.adminNumber, "Facebookpub achat effectué. montant:"+trans.Total);
 
@@ -199,13 +199,13 @@ namespace FacebookAutomation.Controllers
 
         //[HttpPost]
         //[AllowAnonymous]
-        public async void Register(RegisterViewModel model,Transactions trans)
+        public async void Register(RegisterViewModel model, Transactions trans)
         {
             //HelperSMS.SendSMS(Config.adminNumber, "Creation user");
 
             try
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email};
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await _userManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -225,7 +225,7 @@ namespace FacebookAutomation.Controllers
                         Nbre = 10;
                     }
 
-                    
+
                     user.NbreTotalLicence += (int)(trans.Quantite * Nbre);
 
                     var result1 = await _userManager.UpdateAsync(user);
@@ -329,7 +329,7 @@ namespace FacebookAutomation.Controllers
         }
 
 
-        public IActionResult Contact(string email_address,string message,string name,string telephone)
+        public IActionResult Contact(string email_address, string message, string name, string telephone)
         {
             //var rep= SendEmailAsync()
             return View();
@@ -342,8 +342,8 @@ namespace FacebookAutomation.Controllers
 
             mparam.recipients = email;
             mparam.subject = "FacebookPub - Message client " + subject;
-            mparam.text = "<b style=\"color:#333333;font-size:medium;\">" +message+ "</b>";
-            mparam.html = "<b style=\"color:#333333;font-size:medium;\"> "+message+".</b>";
+            mparam.text = "<b style=\"color:#333333;font-size:medium;\">" + message + "</b>";
+            mparam.html = "<b style=\"color:#333333;font-size:medium;\"> " + message + ".</b>";
 
             //mparam.templateEngine = "76bc2231-bf48-4266-9277-9a4f978c3e6e";
             //mparam.Substitution = new Dictionary<string, string>();
@@ -351,7 +351,7 @@ namespace FacebookAutomation.Controllers
             //mparam.Substitution.Add("iti_callback", callbackUrl);
 
 
-           
+
 
             Mailer.SendMail(mparam);
 
@@ -368,7 +368,7 @@ namespace FacebookAutomation.Controllers
         {
 
             DateTime dt = DateTime.UtcNow;
-             ViewBag.jour = dt.Day;
+            ViewBag.jour = dt.Day;
             ViewBag.mois = dt.ToString("MMM").ToUpper();
             //int annee = dt.Year;
             ViewBag.longdate = dt.ToLongDateString();
@@ -377,9 +377,9 @@ namespace FacebookAutomation.Controllers
 
         public IActionResult ListeUtilisateur()
         {
-            var liste = _dbContext.Transactions.Where(t => t.statuscinetpay.ToUpper().Equals("SUCCES") && t.Etat == "ACTIF" 
-            && t.status.ToUpper() == "TERMINER").OrderBy(t=>t.DateTransaction);
-            
+            var liste = _dbContext.Transactions.Where(t => t.statuscinetpay.ToUpper().Equals("SUCCES") && t.Etat == "ACTIF"
+            && t.status.ToUpper() == "TERMINER").OrderBy(t => t.DateTransaction);
+
             return View(liste.ToList());
         }
 
@@ -452,7 +452,7 @@ namespace FacebookAutomation.Controllers
             //return Content("<form action='Register' controller='Account' id='frmTest' method='post'><input type='hidden' name='Email' value='" + model.Email + "' /><input type='hidden' name='Password' value='" + model.Password + "' /><input type='hidden' name='ConfirmPassword' value='" + model.ConfirmPassword + "' /></form><script>document.getElementById('frmTest').submit();</script>");
 
             //return RedirectToAction("Register", "Account", model);
-             return View();
+            return View();
         }
 
         public string GetUniqueKey(int maxSize)
@@ -485,8 +485,8 @@ namespace FacebookAutomation.Controllers
                 FromEmail = email,
                 FromName = EmailFromName,
                 Subject = subject,
-                To = lst,               
-                Html = "<p>Nouveau Mail reçu</p><br />"+ message
+                To = lst,
+                Html = "<p>Nouveau Mail reçu</p><br />" + message
             }));
 
             return task;
@@ -506,16 +506,9 @@ namespace FacebookAutomation.Controllers
             Dictionary<string, string> templateParams = new Dictionary<string, string>();
 
             //templateParams["message"] = "{ \"data\" : {\"message\":\"Hello from Azure!\"}}";
-            var res = await hub.SendGcmNativeNotificationAsync("{ \"data\" : {\"message\":" + message +"}}", new List<string>() { "etransfert" });
+            var res = await hub.SendGcmNativeNotificationAsync("{ \"data\" : {\"message\":\"" + message + "\"}}", new List<string>() { "iti" });
             //var res = await hub.SendTemplateNotificationAsync(templateParams, "etransfert");
 
         }
-
-
-
-
-
-
-
     }
 }

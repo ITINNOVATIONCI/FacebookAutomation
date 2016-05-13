@@ -8,7 +8,7 @@ namespace FacebookAutomation.Services
     public class MailerParametre
     {
 
-        public  string fromAddress = "olaressource@gmail.com";
+        public  string fromAddress = "mathieu.boa@itinnovation-ci.net";
         public string recipients { get; set; }
         public string subject { get; set; }
         public string text { get; set; }
