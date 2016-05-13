@@ -375,6 +375,7 @@ namespace FacebookAutomation.Controllers
             return View();
         }
 
+        [Authorize]
         public IActionResult ListeUtilisateur()
         {
             var liste = _dbContext.Transactions.Where(t => t.statuscinetpay.ToUpper().Equals("SUCCES") && t.Etat == "ACTIF"
@@ -382,7 +383,7 @@ namespace FacebookAutomation.Controllers
 
             return View(liste.ToList());
         }
-
+        [Authorize]
         public IActionResult CreerUtilisateur(string id)
         {
 

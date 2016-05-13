@@ -15,13 +15,13 @@ namespace FacebookAutomation.Services
     {
         //public static MandrillApi _mandrill = new MandrillApi("PqeG2o_2NPgYpX_PTLqAMg");
         public static MandrillApi _mandrill = new MandrillApi("Mw9Lsa5Y5PcbVuy6sa3TVQ");
-        public static string EmailFromAddress = "mathieu.boa@itinnovation-ci.net";
+        public static string EmailFromAddress = "info@itinnovation-ci.net";
         public static string EmailFromName = "FacebookPub";
 
         public Task SendEmailAsync(string email, string subject, string message)
         {
             var lst = new List<Mandrill.Models.EmailAddress>();
-            lst.Add(new Mandrill.Models.EmailAddress("mathieu.boa@itinnovation-ci.net"));
+            lst.Add(new Mandrill.Models.EmailAddress("info@itinnovation-ci.net"));
 
             var task = _mandrill.SendMessage(new SendMessageRequest(new EmailMessage
 
